@@ -25,6 +25,7 @@ body {
 .desc {
   line-height: 175%;
   font-size: 16px;
+  color: $secondary;
 }
 .btn {
   text-align: center;
@@ -35,4 +36,33 @@ body {
   background: #fff;
   color: $primaryColor;
   padding: 5px 24px;
+}
+.line{
+  line-height: 185%;
+  color: #A25F4B;
+  font-size: 16px;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background: $hoverCover;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+  }
+}
+.about {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+.about__title {
+  font-size: 28px;
+  line-height: 143%;
 }
