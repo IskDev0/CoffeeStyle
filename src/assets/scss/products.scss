@@ -1,0 +1,27 @@
+.price {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.product__title {
+  font-size: 20px;
+  line-height: 150%;
+}
+.product__price{
+  color: $secondary;
+  font-size: 16px;
+  cursor: pointer;
+  &-new {
+    color: #A25F4B;
+  }
+  &-old {
+    text-decoration-line: line-through;
+    color: rgba(29, 31, 46, 0.4);
+  }
+}
+.product__item-desc{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 35px;
+}

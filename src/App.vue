@@ -1,19 +1,19 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 import MainHeader from "./components/MainHeader.vue";
 import MainHero from "./components/MainHero.vue"
 import AboutSection from "./components/AboutSection.vue";
-
-</script>
+import FeaturedMugs from "./components/FeaturedMugs.vue";</script>
 
 <template>
-<MainHeader/>
+  <MainHeader/>
   <main class="main">
 
     <MainHero/>
     <div class="container">
       <AboutSection/>
-  <RouterView />
+      <FeaturedMugs/>
+      <RouterView/>
     </div>
   </main>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

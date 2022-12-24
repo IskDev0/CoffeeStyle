@@ -3,45 +3,58 @@
 @import "vars";
 @import "header";
 @import "hero";
+@import "featured";
+@import "products";
 
 body {
   font-family: 'Karla', sans-serif;
   color: $primaryColor;
   font-size: 12px;
 }
+
 .container {
   max-width: 970px;
   margin: 0 auto;
   padding: 0 15px;
 }
+
 .main {
   padding: 100px 15px 0 30px;
+}
+section {
+  padding: 100px 0;
 }
 .section__heading {
   line-height: 150%;
   letter-spacing: 2px;
+  text-align: center;
   text-transform: uppercase;
 }
+
 .desc {
   line-height: 175%;
   font-size: 16px;
   color: $secondary;
 }
+
 .btn {
   text-align: center;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
 .btn-white {
   background: #fff;
   color: $primaryColor;
   padding: 5px 24px;
 }
-.line{
+
+.line {
   line-height: 185%;
   color: #A25F4B;
   font-size: 16px;
   position: relative;
+
   &:after {
     position: absolute;
     content: "";
@@ -53,6 +66,7 @@ body {
     right: 0;
   }
 }
+
 .about {
   max-width: 650px;
   margin: 0 auto;
@@ -62,6 +76,7 @@ body {
   gap: 15px;
   text-align: center;
 }
+
 .about__title {
   font-size: 28px;
   line-height: 143%;

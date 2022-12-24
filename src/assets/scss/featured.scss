@@ -1,0 +1,10 @@
+.featured {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+  }
+  &__item {
+    text-align: center;
+  }
+}
