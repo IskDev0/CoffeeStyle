@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  max-width: 970px;
+  margin: 0 auto;
+}
+.header__menu {
+  display: flex;
+  gap: 30px;
+
+  &-item {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 2px;
+      background: $hoverCover;
+      bottom: -5px;
+      left: 50%;
+      right: 0;
+      transition: 0.3s ease;
+    }
+
+    &:hover:after {
+      width: 100%;
+      left: 0;
+    }
+  }
+}
+.cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background: $hoverCover;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+  }
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__counter {
+    background: $primaryColor;
+    color: #fff;
+    padding: 3px 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+}

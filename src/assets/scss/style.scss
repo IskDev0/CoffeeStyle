@@ -1,6 +1,14 @@
 @import "normalize";
 @import "fonts";
+@import "vars";
+@import "header";
 
 body {
   font-family: 'Karla', sans-serif;
+  color: $primaryColor;
+}
+.container {
+  max-width: 970px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
