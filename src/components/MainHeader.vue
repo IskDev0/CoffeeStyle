@@ -5,7 +5,7 @@
     </a>
     <nav class="header__menu">
       <a href="/" class="header__menu-item">Home</a>
-      <a href="" class="header__menu-item">Our Products</a>
+      <a href="#products" class="header__menu-item">Our Products</a>
       <a href="" class="header__menu-item">Blog</a>
       <a href="" class="header__menu-item">About</a>
       <a href="" class="header__menu-item">Contact</a>

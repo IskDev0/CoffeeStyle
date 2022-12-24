@@ -3,7 +3,8 @@ import {RouterView} from 'vue-router'
 import MainHeader from "./components/MainHeader.vue";
 import MainHero from "./components/MainHero.vue"
 import AboutSection from "./components/AboutSection.vue";
-import FeaturedMugs from "./components/FeaturedMugs.vue";</script>
+import FeaturedMugs from "./components/FeaturedMugs.vue";
+import ProductsSection from "./components/ProductsSection.vue";</script>
 
 <template>
   <MainHeader/>
@@ -13,6 +14,7 @@ import FeaturedMugs from "./components/FeaturedMugs.vue";</script>
     <div class="container">
       <AboutSection/>
       <FeaturedMugs/>
+      <ProductsSection/>
       <RouterView/>
     </div>
   </main>

@@ -19,9 +19,17 @@
     color: rgba(29, 31, 46, 0.4);
   }
 }
+.products__wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px 20px;
+  padding-top: 100px;
+}
 .product__item-desc{
   display: flex;
   flex-direction: column;
+  text-align: center;
   gap: 5px;
   padding-top: 35px;
 }

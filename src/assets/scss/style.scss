@@ -6,6 +6,11 @@
 @import "featured";
 @import "products";
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Karla', sans-serif;
   color: $primaryColor;
