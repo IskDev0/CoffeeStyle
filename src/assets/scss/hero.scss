@@ -1,0 +1,17 @@
+.hero {
+  background: url("../../assets/images/hero-bg.jpg") no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 150px 0;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 50px;
+  }
+  &__title {
+    font-size: 47px;
+    line-height: 128%;
+  }
+}

@@ -2,13 +2,37 @@
 @import "fonts";
 @import "vars";
 @import "header";
+@import "hero";
 
 body {
   font-family: 'Karla', sans-serif;
   color: $primaryColor;
+  font-size: 12px;
 }
 .container {
   max-width: 970px;
   margin: 0 auto;
   padding: 0 15px;
+}
+.main {
+  padding: 100px 15px 0 30px;
+}
+.section__heading {
+  line-height: 150%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.desc {
+  line-height: 175%;
+  font-size: 16px;
+}
+.btn {
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.btn-white {
+  background: #fff;
+  color: $primaryColor;
+  padding: 5px 24px;
 }
