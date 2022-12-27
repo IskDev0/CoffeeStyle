@@ -9,6 +9,7 @@ import {ref} from "vue";
 import CartComponent from "./components/CartComponent.vue";
 import OfferComponent from "./components/OfferComponent.vue";
 import BlogSection from "./components/BlogSection.vue";
+import SubscriptionSection from "./components/SubscriptionSection.vue";
 
 let cart_visibility = ref(false)
 
@@ -36,8 +37,9 @@ let change_visibility = () => {
     <div class="image-section"></div>
     <div class="container">
       <BlogSection/>
-      <RouterView/>
     </div>
+    <SubscriptionSection/>
+    <RouterView/>
   </main>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </template>

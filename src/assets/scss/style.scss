@@ -8,7 +8,7 @@
 @import "products";
 @import "offer";
 @import "blog";
-
+@import "subscription";
 
 html {
   scroll-behavior: smooth;
@@ -38,7 +38,10 @@ section {
   text-align: center;
   text-transform: uppercase;
 }
-
+.section__title {
+  font-size: 36px;
+  line-height: 140%;
+}
 .desc {
   line-height: 175%;
   font-size: 16px;
