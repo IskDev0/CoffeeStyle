@@ -18,6 +18,9 @@ let changeVisibility = () => {
   cartVisibility.value = !cartVisibility.value
 }
 
+let cartContent = ref([])
+
+
 </script>
 
 <template>
@@ -27,7 +30,7 @@ let changeVisibility = () => {
   <main class="main">
     <MainHero/>
     <div class="container">
-      <CartComponent v-if="cartVisibility"/>
+      <CartComponent :cart-content="cartContent" v-if="cartVisibility"/>
       <AboutSection/>
       <FeaturedMugs/>
       <ProductsSection/>
