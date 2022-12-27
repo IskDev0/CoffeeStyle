@@ -2,7 +2,7 @@
   <section id="products" class="products">
     <h1 class="section__heading">More Products</h1>
     <div class="products__wrapper">
-      <div class="products__item" v-for="product in products_info" :key="product.id">
+      <div @click="$emit('cartAdd', product)" class="products__item" v-for="product in products_info" :key="product.id">
         <img :src="product.image" alt="" class="product__item-img">
         <div class="product__item-desc">
           <h3 class="product__title">{{product.title}}</h3>
@@ -19,6 +19,8 @@
 
 <script setup>
 import {ref} from "vue";
+
+let name = "jamal"
 
 let products_info = ref([
   {

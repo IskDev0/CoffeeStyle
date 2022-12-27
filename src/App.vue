@@ -20,7 +20,14 @@ let changeVisibility = () => {
 
 let cartContent = ref([])
 
-
+let addToCart = (product) => {
+  let post = ref({
+    title: product.title,
+    id: Date.now(),
+    price: product.price ? product.price : product.price_new
+  })
+  cartContent.value.push(post)
+}
 </script>
 
 <template>
@@ -30,10 +37,12 @@ let cartContent = ref([])
   <main class="main">
     <MainHero/>
     <div class="container">
-      <CartComponent :cart-content="cartContent" v-if="cartVisibility"/>
+      <CartComponent
+          :cart-content="cartContent"
+          v-if="cartVisibility"/>
       <AboutSection/>
       <FeaturedMugs/>
-      <ProductsSection/>
+      <ProductsSection @cartAdd="addToCart"/>
       <OfferComponent/>
     </div>
     <div class="image-section"></div>
