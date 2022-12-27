@@ -1,0 +1,21 @@
+.blog {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  &__title {
+    font-size: 20px;
+    line-height: 160%;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  &__date {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 150%;
+  }
+}

@@ -8,6 +8,7 @@ import ProductsSection from "./components/ProductsSection.vue";
 import {ref} from "vue";
 import CartComponent from "./components/CartComponent.vue";
 import OfferComponent from "./components/OfferComponent.vue";
+import BlogSection from "./components/BlogSection.vue";
 
 let cart_visibility = ref(false)
 
@@ -16,7 +17,6 @@ let cart_items = ref(["123", "qwerty", "098"])
 let change_visibility = () => {
   cart_visibility.value = !cart_visibility.value
 }
-
 
 
 </script>
@@ -32,6 +32,10 @@ let change_visibility = () => {
       <FeaturedMugs/>
       <ProductsSection @add="changeArr(product.price)"/>
       <OfferComponent/>
+    </div>
+    <div class="image-section"></div>
+    <div class="container">
+      <BlogSection/>
       <RouterView/>
     </div>
   </main>
