@@ -1,7 +1,7 @@
 <template>
   <div class="cart__content">
     <p class="cart__title">Cart items: </p>
-    <p v-for="cart_item in cart_items">
+    <p class="cart__item" v-for="cart_item in cart_items">
       {{cart_item}}
     </p>
   </div>

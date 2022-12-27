@@ -6,6 +6,7 @@
 @import "hero";
 @import "featured";
 @import "products";
+@import "offer";
 
 
 html {
@@ -54,7 +55,11 @@ section {
   color: $primaryColor;
   padding: 5px 24px;
 }
-
+.btn-black {
+  background: $primaryColor;
+  color: #fff;
+  padding: 5px 24px;
+}
 .line {
   line-height: 185%;
   color: #A25F4B;
