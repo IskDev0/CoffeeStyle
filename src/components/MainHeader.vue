@@ -12,7 +12,7 @@
       <a href="" class="header__menu-item">Styleguide</a>
     </nav>
     <div class="cart">
-      <button @click="$emit('test', cart_visibility)" class="cart__button">
+      <button @click="$emit('visibility', cartVisibility)" class="cart__button">
         <img src="../assets/images/cart.svg" alt="Cart">
         <p>Cart</p>
       </button>
@@ -23,7 +23,7 @@
 
 <script setup>
 let props = defineProps({
-  cart_visibility: {
+  cartVisibility: {
     type: Boolean,
     required: true
   }

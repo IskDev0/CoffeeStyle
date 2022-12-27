@@ -1,38 +1,36 @@
 <script setup>
+import {ref} from "vue";
 import {RouterView} from 'vue-router'
 import MainHeader from "./components/MainHeader.vue";
 import MainHero from "./components/MainHero.vue"
 import AboutSection from "./components/AboutSection.vue";
 import FeaturedMugs from "./components/FeaturedMugs.vue";
 import ProductsSection from "./components/ProductsSection.vue";
-import {ref} from "vue";
 import CartComponent from "./components/CartComponent.vue";
 import OfferComponent from "./components/OfferComponent.vue";
 import BlogSection from "./components/BlogSection.vue";
 import SubscriptionSection from "./components/SubscriptionSection.vue";
 import MainFooter from "./components/MainFooter.vue";
 
-let cart_visibility = ref(false)
+let cartVisibility = ref(false)
 
-let cart_items = ref(["123", "qwerty", "098"])
-
-let change_visibility = () => {
-  cart_visibility.value = !cart_visibility.value
+let changeVisibility = () => {
+  cartVisibility.value = !cartVisibility.value
 }
-
 
 </script>
 
 <template>
-  <MainHeader @test="change_visibility" :cart_visibility="cart_visibility"/>
+  <MainHeader
+      @visibility="changeVisibility"
+      :cart-visibility="cartVisibility"/>
   <main class="main">
-
     <MainHero/>
     <div class="container">
-      <CartComponent v-if="cart_visibility" :cart_items="cart_items"/>
+      <CartComponent v-if="cartVisibility"/>
       <AboutSection/>
       <FeaturedMugs/>
-      <ProductsSection @add="changeArr(product.price)"/>
+      <ProductsSection/>
       <OfferComponent/>
     </div>
     <div class="image-section"></div>
