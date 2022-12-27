@@ -10,6 +10,7 @@ import CartComponent from "./components/CartComponent.vue";
 import OfferComponent from "./components/OfferComponent.vue";
 import BlogSection from "./components/BlogSection.vue";
 import SubscriptionSection from "./components/SubscriptionSection.vue";
+import MainFooter from "./components/MainFooter.vue";
 
 let cart_visibility = ref(false)
 
@@ -41,6 +42,6 @@ let change_visibility = () => {
     <SubscriptionSection/>
     <RouterView/>
   </main>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <MainFooter/>
 </template>
 
