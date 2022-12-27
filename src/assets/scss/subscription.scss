@@ -17,6 +17,11 @@
       border: 1px solid #2F303E;
       padding: 18px 40px;
       color: #fff;
+      transition: 0.2s ease;
+      &:focus{
+        outline: none;
+        border: 1px solid #fff;
+      }
     }
   }
 }

@@ -13,7 +13,7 @@
         <h1 class="section__heading">Premium Offer</h1>
         <h3 class="section__title">Get our Coffee Magazine</h3>
         <p class="desc">The most versatile furniture system ever created. Designed to fit your life.</p>
-        <button class="btn btn-black">Start Shopping</button>
+        <a href="#products" class="btn btn-black">Start Shopping</a>
       </div>
     </div>
   </section>

@@ -1,5 +1,5 @@
 <template>
-  <section class="blog">
+  <section id="blog" class="blog">
     <div class="blog__wrapper">
       <div class="blog__item">
         <img src="../assets/images/blog/blog-image1.jpg" alt="" class="blog__image">

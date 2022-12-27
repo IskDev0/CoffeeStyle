@@ -6,9 +6,9 @@
     <nav class="header__menu">
       <a href="/" class="header__menu-item">Home</a>
       <a href="#products" class="header__menu-item">Our Products</a>
-      <a href="" class="header__menu-item">Blog</a>
-      <a href="" class="header__menu-item">About</a>
-      <a href="" class="header__menu-item">Contact</a>
+      <a href="#blog" class="header__menu-item">Blog</a>
+      <a href="#about" class="header__menu-item">About</a>
+      <a href="#contact" class="header__menu-item">Contact</a>
       <a href="" class="header__menu-item">Styleguide</a>
     </nav>
     <div class="cart">

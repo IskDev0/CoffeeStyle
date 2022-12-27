@@ -53,17 +53,29 @@ section {
   text-align: center;
   letter-spacing: 2px;
   text-transform: uppercase;
+  padding: 5px 24px;
+  cursor: pointer;
 }
 
 .btn-white {
   background: #fff;
   color: $primaryColor;
-  padding: 5px 24px;
+  transition: 0.3s ease;
+  &:hover {
+    background: $primaryColor;
+    color: #fff;
+    outline: 1px solid #fff;
+  }
 }
 .btn-black {
   background: $primaryColor;
   color: #fff;
-  padding: 5px 24px;
+  transition: 0.3s ease;
+  &:hover {
+    background: #fff;
+    color: $primaryColor;
+    outline: 1px solid $primaryColor;
+  }
 }
 .line {
   line-height: 185%;

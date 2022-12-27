@@ -7,7 +7,7 @@
         <p class="desc">The most versatile furniture system ever created. Designed to fit your life, made to move and
           grow.</p>
       </div>
-      <button class="btn btn-white">Explore Our Products</button>
+      <a href="#products" class="btn btn-white">Explore Our Products</a>
     </div>
   </section>
 </template>
