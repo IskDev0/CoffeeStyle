@@ -23,8 +23,9 @@ let cartContent = ref([])
 let addToCart = (product) => {
   let productItem = ref({
     title: product.title,
-    id: Date.now(),
-    price: product.price ? product.price : product.price_new
+    id: product.id,
+    price: product.price ? product.price : product.price_new,
+    image: product.image
   })
   cartContent.value.unshift(productItem)
 }
