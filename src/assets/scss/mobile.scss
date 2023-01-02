@@ -42,12 +42,15 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.667rem;
 }
 .mobile__menu {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  &-item {
+
+  }
 }
 
 .active {

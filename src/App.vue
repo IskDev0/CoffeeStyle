@@ -21,12 +21,12 @@ let changeVisibility = () => {
 let cartContent = ref([])
 
 let addToCart = (product) => {
-  let post = ref({
+  let productItem = ref({
     title: product.title,
     id: Date.now(),
     price: product.price ? product.price : product.price_new
   })
-  cartContent.value.push(post)
+  cartContent.value.unshift(productItem)
 }
 </script>
 
@@ -38,9 +38,11 @@ let addToCart = (product) => {
   <main class="main">
     <MainHero/>
     <div class="container">
+      <Transition name="slide-fade">
       <CartComponent
           :cart-content="cartContent"
           v-if="cartVisibility"/>
+      </Transition>
       <AboutSection/>
       <FeaturedMugs/>
       <ProductsSection @cartAdd="addToCart"/>
@@ -55,4 +57,20 @@ let addToCart = (product) => {
   </main>
   <MainFooter/>
 </template>
+
+<style>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+</style>
 

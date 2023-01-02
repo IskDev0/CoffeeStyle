@@ -4,8 +4,11 @@
     justify-content: space-between;
     gap: 20px;
   }
+  &__image {
+    max-width: 500px;
+  }
   &__title {
-    font-size: 20px;
+    font-size: 1.667rem;
     line-height: 160%;
   }
   &__item {

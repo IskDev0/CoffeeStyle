@@ -16,19 +16,20 @@
         <img src="../assets/images/cart.svg" alt="Cart">
         <p>Cart</p>
       </button>
-      <span class="cart__counter">{{cartContent.length}}</span>
+      <span class="cart__counter">{{ cartContent.length }}</span>
     </div>
     <div @click="openMobile" class="openMobile">
       <div class="openMobile-line"></div>
     </div>
-    <MobileMenu @closeMobile="closeMobile" :show-mobile="showMobile" v-if="showMobile" />
+    <Transition name="slide-fade">
+      <MobileMenu @closeMobile="closeMobile" :show-mobile="showMobile" v-if="showMobile"/>
+    </Transition>
   </header>
 </template>
 
 <script setup>
 import MobileMenu from "../components/MobileMenu.vue"
 import {ref} from "vue";
-
 
 
 let show = ref(false)
@@ -59,4 +60,17 @@ let props = defineProps({
 })
 </script>
 <style>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(200px);
+  opacity: 0;
+}
 </style>

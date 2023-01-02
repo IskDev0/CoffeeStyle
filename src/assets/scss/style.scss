@@ -15,12 +15,12 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 12px;
 }
 
 body {
   font-family: 'Karla', sans-serif;
   color: $primaryColor;
-  font-size: 12px;
 }
 
 .container {
@@ -36,12 +36,6 @@ section {
   padding: 100px 0;
 }
 
-@media (max-width: 500px) {
-  section {
-    padding: 50px 0;
-  }
-}
-
 .section__heading {
   line-height: 150%;
   letter-spacing: 2px;
@@ -49,12 +43,12 @@ section {
   text-transform: uppercase;
 }
 .section__title {
-  font-size: 36px;
+  font-size: 3rem;
   line-height: 140%;
 }
 .desc {
   line-height: 175%;
-  font-size: 16px;
+  font-size: 1.333rem;
   color: $secondary;
 }
 
@@ -89,7 +83,7 @@ section {
 .line {
   line-height: 185%;
   color: #A25F4B;
-  font-size: 16px;
+  font-size: 1.333rem;
   position: relative;
 
   &:after {
@@ -115,7 +109,7 @@ section {
 }
 
 .about__title {
-  font-size: 28px;
+  font-size: 2.333rem;
   line-height: 143%;
 }
 .image-section {
@@ -123,4 +117,19 @@ section {
   background-size: cover;
   width: 100%;
   height: 400px;
+}
+
+@media (max-width: 500px) {
+  section {
+    padding: 50px 0;
+  }
+  .section__title {
+    font-size: 2rem;
+  }
+  .desc {
+    font-size: 1rem;
+  }
+  .about__title {
+    font-size: 2rem;
+  }
 }

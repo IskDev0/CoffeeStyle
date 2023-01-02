@@ -42,6 +42,9 @@
   }
 }
 @media (max-width: 500px) {
+  html {
+    font-size: 10px;
+  }
   .offer__images {
     display: none;
   }
@@ -56,5 +59,8 @@
   }
   .image-section {
     display: none;
+  }
+  .footer__list-link {
+    font-size: 1rem;
   }
 }
