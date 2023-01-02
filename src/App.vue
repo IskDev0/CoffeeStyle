@@ -29,6 +29,14 @@ let addToCart = (product) => {
   })
   cartContent.value.unshift(productItem)
 }
+
+let deleteFromCart = (cartItem) => {
+  let myIndex = cartContent.value.indexOf(cartItem)
+  if (myIndex !== -1){
+    cartContent.value.splice(myIndex, 1)
+  }
+}
+
 </script>
 
 <template>
@@ -41,6 +49,7 @@ let addToCart = (product) => {
     <div class="container">
       <Transition name="slide-fade">
       <CartComponent
+          @delete="deleteFromCart"
           :cart-content="cartContent"
           v-if="cartVisibility"/>
       </Transition>
