@@ -16,16 +16,47 @@
         <img src="../assets/images/cart.svg" alt="Cart">
         <p>Cart</p>
       </button>
-      <span class="cart__counter">0</span>
+      <span class="cart__counter">{{cartContent.length}}</span>
     </div>
+    <div @click="openMobile" class="openMobile">
+      <div class="openMobile-line"></div>
+    </div>
+    <MobileMenu @closeMobile="closeMobile" :show-mobile="showMobile" v-if="showMobile" />
   </header>
 </template>
 
 <script setup>
+import MobileMenu from "../components/MobileMenu.vue"
+import {ref} from "vue";
+
+
+
+let show = ref(false)
+let showMobile = ref(false)
+
+
+let closeMobile = () => {
+  let btn = document.querySelector(".openMobile-line")
+  btn.classList.remove("active")
+  showMobile.value = false
+}
+
+let openMobile = () => {
+  let btn = document.querySelector(".openMobile-line")
+  btn.classList.toggle("active")
+  showMobile.value = !showMobile.value
+}
+
 let props = defineProps({
   cartVisibility: {
     type: Boolean,
     required: true
+  },
+  cartContent: {
+    type: Array,
+    required: true
   }
 })
 </script>
+<style>
+</style>

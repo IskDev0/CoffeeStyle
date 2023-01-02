@@ -32,6 +32,7 @@ let addToCart = (product) => {
 
 <template>
   <MainHeader
+      :cart-content="cartContent"
       @visibility="changeVisibility"
       :cart-visibility="cartVisibility"/>
   <main class="main">

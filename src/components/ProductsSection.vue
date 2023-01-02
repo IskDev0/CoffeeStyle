@@ -20,7 +20,6 @@
 <script setup>
 import {ref} from "vue";
 
-let name = "jamal"
 
 let products_info = ref([
   {
@@ -30,6 +29,7 @@ let products_info = ref([
     price_old: "$ 37.00 USD",
     image: new URL('../assets/images/products/product-img1.jpg', import.meta.url).href,
   },
+
   {
     id: 2,
     title: "Black Tea Cup",

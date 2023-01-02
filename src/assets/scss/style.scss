@@ -2,6 +2,7 @@
 @import "fonts";
 @import "vars";
 @import "header";
+@import "mobile";
 @import "cart";
 @import "hero";
 @import "featured";
@@ -10,6 +11,7 @@
 @import "blog";
 @import "subscription";
 @import "footer";
+@import "response";
 
 html {
   scroll-behavior: smooth;
@@ -28,11 +30,18 @@ body {
 }
 
 .main {
-  padding: 100px 15px 0 30px;
+  padding: 100px 15px 0 15px;
 }
 section {
   padding: 100px 0;
 }
+
+@media (max-width: 500px) {
+  section {
+    padding: 50px 0;
+  }
+}
+
 .section__heading {
   line-height: 150%;
   letter-spacing: 2px;
