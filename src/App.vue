@@ -20,21 +20,49 @@ let changeVisibility = () => {
 
 let cartContent = ref([])
 
-let addToCart = (product) => {
+let addToCart = (product, cartItem) => {
   let productItem = ref({
     title: product.title,
     id: product.id,
     price: product.price ? product.price : product.price_new,
-    image: product.image
+    image: product.image,
+    quantity: 1
   })
-  cartContent.value.unshift(productItem)
+
+  cartContent.value.push(productItem)
+
+
+
+  // if (cartContent.value.length){
+  //   let isExist = ref(false)
+  //   cartContent.value.map(item => {
+  //     if (item.value.id === cartItem.value.id){
+  //       isExist++
+  //     }
+  //   })
+  //   if (!isExist){
+  //     cartContent.value.push(productItem)
+  //   }
+  // }else {
+  //   cartContent.value.push(productItem)
+  // }
+
 }
 
+
+
 let deleteFromCart = (cartItem) => {
-  let myIndex = cartContent.value.indexOf(cartItem)
-  if (myIndex !== -1){
-    cartContent.value.splice(myIndex, 1)
-  }
+
+  cartContent.value.forEach((el, i) => {
+    if (el.value.id === cartItem.value.id) {
+      cartContent.value.splice(i, 1)
+    }
+  })
+
+  // let myIndex = cartContent.value.indexOf(cartItem)
+  // if (myIndex !== -1){
+  //   cartContent.value.splice(myIndex, 1)
+  // }
 }
 
 </script>
@@ -48,10 +76,10 @@ let deleteFromCart = (cartItem) => {
     <MainHero/>
     <div class="container">
       <Transition name="slide-fade">
-      <CartComponent
-          @delete="deleteFromCart"
-          :cart-content="cartContent"
-          v-if="cartVisibility"/>
+        <CartComponent
+            @delete="deleteFromCart"
+            :cart-content="cartContent"
+            v-if="cartVisibility"/>
       </Transition>
       <AboutSection/>
       <FeaturedMugs/>
