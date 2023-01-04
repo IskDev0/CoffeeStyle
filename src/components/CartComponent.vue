@@ -3,7 +3,7 @@
     <div v-if="cartContent.length" class="cart__wrapper">
       <p class="cart__title">Total: {{ cartContent.length }} </p>
       <TransitionGroup name="list">
-        <div class="cart__item" v-for="cartItem in props.cartContent" :key="cartItem.value.id">
+        <div @click="$emit('cartAdd', cartItem)" class="cart__item" v-for="cartItem in props.cartContent" :key="cartItem.value.id">
           <img class="cart__item-image" :src="cartItem.value.image" alt="">
           <div class="cart__inner">
             <p>{{cartItem.value.quantity}}</p>

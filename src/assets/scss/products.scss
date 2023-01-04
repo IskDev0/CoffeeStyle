@@ -3,6 +3,9 @@
   justify-content: center;
   gap: 10px;
 }
+.products__item{
+  cursor: pointer;
+}
 .product__title {
   font-size: 1.667rem;
   line-height: 150%;

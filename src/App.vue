@@ -12,6 +12,8 @@ import BlogSection from "./components/BlogSection.vue";
 import SubscriptionSection from "./components/SubscriptionSection.vue";
 import MainFooter from "./components/MainFooter.vue";
 
+import products_info from "./product_info"
+
 let cartVisibility = ref(false)
 
 let changeVisibility = () => {
@@ -19,6 +21,7 @@ let changeVisibility = () => {
 }
 
 let cartContent = ref([])
+
 
 let addToCart = (product, cartItem) => {
   let productItem = ref({
@@ -83,7 +86,9 @@ let deleteFromCart = (cartItem) => {
       </Transition>
       <AboutSection/>
       <FeaturedMugs/>
-      <ProductsSection @cartAdd="addToCart"/>
+      <ProductsSection
+          :products_info="products_info"
+          @cartAdd="addToCart"/>
       <OfferComponent/>
     </div>
     <div class="image-section"></div>
