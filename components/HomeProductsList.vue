@@ -7,7 +7,7 @@
           :key="product.id"/>
     </div>
     <div class="flex justify-center mt-10">
-      <MainButton>See all</MainButton>
+      <MainButton color="blue">See all</MainButton>
     </div>
   </div>
 </template>
