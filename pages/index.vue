@@ -1,6 +1,8 @@
 <template>
-<p>Lorem ipsum dolor sit amet.</p>
+<HomeProductsList/>
 </template>
 
-<script setup>
+<script setup lang="ts">
+
+import HomeProductsList from "~/components/HomeProductsList.vue";
 </script>

@@ -18,5 +18,10 @@ export default defineNuxtConfig({
         wght: [400, 700],
       },
     }
-  }
+  },
+  // @ts-ignore
+  components: [
+    { path: '~/components/UI', prefix: 'UI' },
+    '~/components'
+  ]
 })
