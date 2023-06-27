@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    '@nuxtjs/google-fonts'
   ],
   pinia: {
     autoImports: [
@@ -11,4 +12,11 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'],
     ],
   },
+  googleFonts: {
+    families: {
+      Karla: {
+        wght: [400, 700],
+      },
+    }
+  }
 })
