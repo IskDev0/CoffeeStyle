@@ -4,10 +4,10 @@
     <nav>
       <ul class="flex items-center gap-8">
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
-          <NuxtLink>Home</NuxtLink>
+          <NuxtLink to="/">Home</NuxtLink>
         </li>
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
-          <NuxtLink>Our Products</NuxtLink>
+          <NuxtLink to="/products">Our Products</NuxtLink>
         </li>
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
           <NuxtLink>Blog</NuxtLink>
