@@ -4,7 +4,9 @@
   <slot/>
     <TheSubscribe/>
   </main>
+  <TheFooter/>
 </template>
 <script setup>
+
 
 </script>

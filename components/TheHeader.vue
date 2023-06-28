@@ -1,5 +1,5 @@
 <template>
-  <header class="flex items-center justify-between py-6 fixed top-0 right-0 left-0 bg-white shadow-xl px-20 text-[#1D1F2E]">
+  <header class="flex items-center justify-between py-6 fixed top-0 right-0 left-0 z-20 bg-white shadow-xl px-20 text-[#1D1F2E]">
     <NuxtLink to="/"><img src="/logo.svg" alt="Logo"></NuxtLink>
     <nav>
       <ul class="flex items-center gap-8">

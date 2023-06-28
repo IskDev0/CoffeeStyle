@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-[#1D1F2E] text-white text-center py-20">
+  <section class="bg-[#1D1F2E] text-white text-center py-20 mt-24">
     <div class="w-1/3 mx-auto">
 <h1 class="tracking-widest uppercase text-xs">Sign up and get free coffee bags</h1>
   <h2 class="text-4xl pt-4 pb-6">Coffee Updates</h2>
