@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+// @ts-ignore
 import productsList from "/products.json"
 
 export const useProductsStore = defineStore('products', () => {

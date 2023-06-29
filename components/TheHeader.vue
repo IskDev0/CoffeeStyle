@@ -22,17 +22,19 @@
     </nav>
     <div class="flex items-center gap-5">
       <div class="flex items-center gap-3">
-        <NuxtLink><img src="/cart.svg" alt="cart"></NuxtLink>
+        <NuxtLink class="flex items-center gap-4" to="/cart"><img src="/cart.svg" alt="cart">
         <span class="text-xs uppercase tracking-widest">Cart</span>
-        <span class="bg-[#1D1F2E] px-2 py-0.5 rounded-full text-white">0</span>
+        <span class="bg-[#1D1F2E] px-2 py-0.5 rounded-full text-white">{{cartStore.cartProducts.length}}</span>
+        </NuxtLink>
       </div>
       <NuxtLink><img src="/user.svg" alt="user"></NuxtLink>
     </div>
   </header>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
+import {useCartStore} from "~/stores/cart";
+const cartStore = useCartStore()
 </script>
 
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <article class="flex flex-col items-center text-center">
+  <article @click="$router.push(`products/${product.id}`)" class="flex flex-col items-center text-center cursor-pointer">
     <img :src="product.image" :alt="product.title">
     <div class="flex flex-col gap-1 pt-9">
     <h1 class="text-xl">{{ product.title }}</h1>
