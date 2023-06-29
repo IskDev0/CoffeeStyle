@@ -13,21 +13,28 @@
           <input class="w-6" v-model="quantity" type="number">
           <button @click="increase">+</button>
         </div>
-        <MainButton @click="addToCart" color="blue">Add to cart</MainButton>
+        <MainButton v-if="!isExist(currentProduct)" @click="addToCart" color="blue">Add to cart</MainButton>
+          <NuxtLink v-else to="/cart">Go to cart</NuxtLink>
         </div>
       </div>
     </div>
   </div>
+  <Transition name="slide-fade">
+  <CartAlert @close="closeAlert" v-if="isAdded" />
+  </Transition>
 </template>
 
 <script setup lang="ts">
 import {useProductsStore} from "../../stores/products";
 import {useCartStore} from "~/stores/cart";
 import MainButton from "~/components/UI/MainButton.vue";
+import CartAlert from "~/components/CartAlert.vue";
 
 const productsStore = useProductsStore()
 const cartStore = useCartStore()
 const route = useRoute()
+
+const isAdded =ref<boolean>(false)
 
 const quantity = ref<number>(1)
 
@@ -43,6 +50,10 @@ const decrease = () => {
 
 const currentProduct = ref<ProductType>()
 
+const isExist = (currentProduct:ProductType) => {
+  return cartStore.cartProducts.find(product => product.id == currentProduct?.id)
+}
+
 const getCurrentProduct = () => {
   currentProduct.value = productsStore.products.filter(product => product.id === Number(route.params.id))[0]
 }
@@ -56,16 +67,18 @@ const addToCart = () => {
   const exists = cartStore.cartProducts.find(
       (product) => product.id === tempObj.id
   );
-
-  if (exists){
-    exists.quantity+=quantity.value
-  }else {
+  if (!exists){
+    isAdded.value = true
     cartStore.cartProducts.push(tempObj);
   }
-
-  quantity.value = 1;
+  setTimeout(()=> {
+    isAdded.value = false
+  },3000)
 };
 
+const closeAlert = () => {
+  isAdded.value = false
+}
 
 
 onMounted(() => {
@@ -84,4 +97,17 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
 </style>
