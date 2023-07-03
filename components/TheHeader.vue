@@ -16,7 +16,7 @@
           <NuxtLink>About</NuxtLink>
         </li>
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
-          <NuxtLink>Contact</NuxtLink>
+          <NuxtLink to="/contact">Contact</NuxtLink>
         </li>
       </ul>
     </nav>
