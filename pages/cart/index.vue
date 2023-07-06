@@ -26,8 +26,8 @@
         </button>
 
       </div>
-      <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice }}</h1>
     </TransitionGroup>
+    <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice }}</h1>
   </div>
   <div v-else>
     <h1 class="text-3xl text-center font-bold mt-10">Cart is empty</h1>
@@ -54,7 +54,7 @@ const totalPrice = computed((): number => {
 })
 
 const deleteItemFromCart = (cartItem: CartProductType) => {
-  cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
+  cartStore.cartProducts = cartStore.cartProducts?.filter(item => item.id !== cartItem.id)
 }
 
 </script>

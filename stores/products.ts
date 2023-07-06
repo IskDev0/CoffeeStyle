@@ -1,13 +1,14 @@
 import {defineStore} from "pinia";
 // @ts-ignore
-import productsList from "/products.json"
 
 export const useProductsStore = defineStore('products', () => {
-    const products = ref<ProductType[]>(productsList)
+    const products = ref<ProductType[]>()
 
     const sortedProducts = ref<ProductType[]>()
 
+    const areProductsLoading= ref<boolean>(false)
+
     return {
-        products, sortedProducts
+        products, sortedProducts, areProductsLoading
     }
 })

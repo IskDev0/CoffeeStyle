@@ -51,11 +51,11 @@ const decrease = () => {
 const currentProduct = ref<ProductType>()
 
 const isExist = (currentProduct:ProductType) => {
-  return cartStore.cartProducts.find(product => product.id == currentProduct?.id)
+  return cartStore.cartProducts?.find(product => product.title == currentProduct?.title)
 }
 
 const getCurrentProduct = () => {
-  currentProduct.value = productsStore.products.filter(product => product.id === Number(route.params.id))[0]
+  currentProduct.value = productsStore.products?.filter(product => product.title === route.params.id)[0]
 }
 
 const addToCart = () => {
@@ -64,12 +64,12 @@ const addToCart = () => {
     quantity: quantity.value,
   } as CartProductType;
 
-  const exists = cartStore.cartProducts.find(
+  const exists = cartStore.cartProducts?.find(
       (product) => product.id === tempObj.id
   );
   if (!exists){
     isAdded.value = true
-    cartStore.cartProducts.push(tempObj);
+    cartStore.cartProducts?.push(tempObj);
   }
   setTimeout(()=> {
     isAdded.value = false

@@ -1,10 +1,10 @@
 <template>
   <TransitionGroup name="list">
-<ProductItem
-v-for="product in productsStore.sortedProducts"
-:product="product"
-:key="product.id"
-/>
+    <ProductItem
+        v-for="product in productsStore.sortedProducts"
+        :product="product"
+        :key="product.id"
+    />
   </TransitionGroup>
 </template>
 
@@ -13,6 +13,32 @@ import ProductItem from "./ProductItem";
 import {useProductsStore} from "../stores/products";
 
 const productsStore = useProductsStore()
+
+const supabase = useSupabaseClient()
+
+const loadProducts = async () => {
+
+  try {
+
+    let {data: productsList, error} = await supabase
+        .from('products')
+        .select('*')
+
+    productsStore.areProductsLoading = true
+
+    productsStore.products = productsList
+    productsStore.sortedProducts = productsStore.products
+  } catch (error) {
+    console.log(error)
+  } finally {
+    productsStore.areProductsLoading = false
+  }
+
+}
+
+onMounted(() => {
+  loadProducts()
+})
 </script>
 
 <style scoped>

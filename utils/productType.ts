@@ -1,8 +1,9 @@
 type ProductType = {
-    id: number
+    id: number,
+    created_at: string,
     title: string,
     price: number,
     description: string,
     image: string,
-    discount: number | boolean
+    discount: number | null
 }
