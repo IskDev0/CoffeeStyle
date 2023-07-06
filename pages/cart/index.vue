@@ -54,7 +54,7 @@ const totalPrice = computed((): number => {
 })
 
 const deleteItemFromCart = (cartItem: CartProductType) => {
-  cartStore.cartProducts = cartStore.cartProducts?.filter(item => item.id !== cartItem.id)
+  cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
 }
 
 </script>

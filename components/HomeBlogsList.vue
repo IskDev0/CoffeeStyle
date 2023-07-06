@@ -7,30 +7,22 @@
 <script setup lang="ts">
 import BlogItem from "~/components/BlogItem.vue";
 
-const homeBlogs = ref<BlogType[]>([
-  {
-    "id": 1,
-    "title": "Health Check: why do I get a headache when I haven’t had my coffee?",
-    "short_body": "It is a paradisematic country, in which roasted parts of sentences fly into your mouth.",
-    "body": "",
-    "image": "/blogs/blog-image-1.jpg",
-    "date": "October 9, 2018"
-  },
-  {
-    "id": 2,
-    "title": "How long does a cup of coffee keep you awake?",
-    "short_body": "It is a paradisematic country, in which roasted parts. Vel qui et ad voluptatem.",
-    "body": "",
-    "image": "/blogs/blog-image-2.jpg",
-    "date": "October 9, 2018"
-  },
-  {
-    "id": 3,
-    "title": "Recent research suggests that heavy coffee drinkers may reap health benefits.",
-    "short_body": "It is a paradisematic country, in which roasted parts of sentences fly into your mouth.",
-    "body": "",
-    "image": "/blogs/blog-image-3.jpg",
-    "date": "October 9, 2018"
-  },
-])
+const homeBlogs = ref<BlogType[]>([])
+
+const supabase = useSupabaseClient([])
+
+const loadHomeBlogs = async () => {
+
+  let { data: blogs, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(3)
+
+  homeBlogs.value = blogs
+}
+
+onMounted(() => {
+  loadHomeBlogs()
+})
 </script>

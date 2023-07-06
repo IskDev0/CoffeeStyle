@@ -10,7 +10,7 @@
           <NuxtLink to="/products">Our Products</NuxtLink>
         </li>
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
-          <NuxtLink>Blog</NuxtLink>
+          <NuxtLink to="/blogs">Blog</NuxtLink>
         </li>
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
           <NuxtLink>About</NuxtLink>

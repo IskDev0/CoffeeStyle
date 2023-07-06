@@ -1,8 +1,8 @@
 type BlogType = {
     id: number,
-    title: string,
-    short_body: string,
+    head: string,
+    body_short: string,
     body: string,
     image: string,
-    date: string
+    created_at: string
 }
