@@ -1,0 +1,76 @@
+<template>
+  <section v-if="!isLoading" class="w-1/2 mx-auto">
+    <form @submit.prevent="submitAuthForm" class="flex flex-col  gap-4">
+      <label class="text-xs uppercase tracking-widest font-bold" for="email">Email</label>
+      <input class="border-2 border-[#1D1F2E] rounded-md p-3" v-model="signFormData.email" type="email" id="email">
+      <span class="text-red-500" v-for="error in $v.email.$errors" :key="error.$uid">{{error.$message}}</span>
+      <label class="text-xs uppercase tracking-widest font-bold" for="password">Password</label>
+      <input class="border-2 border-[#1D1F2E] rounded-md p-3" v-model="signFormData.password" type="password" id="password">
+      <span class="text-red-500" v-for="error in $v.password.$errors" :key="error.$uid">{{error.$message}}</span>
+      <MainButton class="self-center w-full rounded-md" color="blue" type="submit">Login</MainButton>
+    </form>
+    <span class="flex justify-center gap-2 mt-6">Dont have an account? <NuxtLink class="font-bold underline" to="/auth/register">Sign Up</NuxtLink></span>
+  </section>
+  <TheLoader v-else/>
+</template>
+
+<script setup lang="ts">
+
+import TheLoader from "~/components/UI/TheLoader.vue";
+
+const client = useSupabaseAuthClient()
+
+
+import {required, email, minLength} from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import MainButton from "~/components/UI/MainButton.vue";
+
+
+const signFormData = ref(
+    {
+      email: "",
+      password: ""
+    }
+)
+
+
+
+const rules = computed(() => {
+  return {
+    email: { required, email },
+    password: {required, minLength: minLength(6)}
+
+  };
+});
+
+const isLoading = ref<boolean>(false)
+
+const router = useRouter()
+
+const submitAuthForm = async () => {
+  const result = await $v.value.$validate()
+
+  try {
+    isLoading.value = true
+    const { data, error } = await client.auth.signInWithPassword({
+      email: signFormData.value.email,
+      password: signFormData.value.password,
+    })
+
+    if (error) {
+      throw  error
+    }else {
+      router.replace("/profile")
+    }
+  }catch (error){
+    console.log(error)
+  }finally {
+    isLoading.value = false
+  }
+
+  if (!result) return
+}
+
+const $v = useVuelidate(rules, signFormData)
+
+</script>

@@ -27,7 +27,7 @@
         <span class="bg-[#1D1F2E] px-2 py-0.5 rounded-full text-white">{{cartStore.cartProducts.length}}</span>
         </NuxtLink>
       </div>
-      <NuxtLink><img src="/user.svg" alt="user"></NuxtLink>
+      <NuxtLink to="/profile"><img src="/user.svg" alt="user"></NuxtLink>
     </div>
   </header>
 </template>
