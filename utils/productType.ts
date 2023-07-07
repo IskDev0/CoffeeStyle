@@ -5,5 +5,5 @@ type ProductType = {
     price: number,
     description: string,
     image: string,
-    discount: number | null
+    discount: number
 }
