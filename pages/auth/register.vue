@@ -52,7 +52,7 @@ const signUp = async () => {
       password: registerFormData.value.password
     })
     if (error) throw error
-    successMessage.value = "Check your email to confirm your account."
+    router.replace("/profile")
   }catch (error){
     console.log(error)
   }

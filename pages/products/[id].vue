@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 mx-auto">
+  <section v-if="currentProduct" class="w-1/2 mx-auto">
     <div class="flex items-start gap-20" v-if="currentProduct">
     <img :src="currentProduct.image" :alt="currentProduct.title">
       <div>
@@ -18,17 +18,21 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <TheLoader v-else/>
   <Transition name="slide-fade">
   <CartAlert @close="closeAlert" v-if="isAdded" />
   </Transition>
 </template>
 
 <script setup lang="ts">
-import {useProductsStore} from "../../stores/products";
+import {useProductsStore} from "~/stores/products";
 import {useCartStore} from "~/stores/cart";
 import MainButton from "~/components/UI/MainButton.vue";
 import CartAlert from "~/components/CartAlert.vue";
+import TheLoader from "~/components/UI/TheLoader.vue";
+
+const supabase = useSupabaseClient()
 
 const productsStore = useProductsStore()
 const cartStore = useCartStore()
@@ -54,8 +58,17 @@ const isExist = (currentProduct:ProductType) => {
   return cartStore.cartProducts?.find(product => product.title == currentProduct?.title)
 }
 
-const getCurrentProduct = () => {
-  currentProduct.value = productsStore.products?.filter(product => product.title === route.params.id)[0]
+const getCurrentProduct = async () => {
+
+  let { data: product, error } = await supabase
+      .from('products')
+      .select("*")
+      .eq('id', route.params.id)
+      .single()
+
+  currentProduct.value = product
+
+
 }
 
 const addToCart = () => {
