@@ -1,7 +1,7 @@
 <template>
   <section v-if="currentProduct" class="w-1/2 mx-auto">
     <div class="flex items-start gap-20" v-if="currentProduct">
-    <img :src="currentProduct.image" :alt="currentProduct.title">
+    <img class="h-96 w-80" :src="currentProduct.image" :alt="currentProduct.title">
       <div>
     <p class="font-bold text-3xl">{{currentProduct.title }}</p>
         <p class="pt-8 opacity-70">{{currentProduct.description}}</p>

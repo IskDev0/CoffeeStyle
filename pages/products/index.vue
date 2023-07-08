@@ -1,7 +1,7 @@
 <template>
 <section class="w-1/2 mx-auto">
   <SortProducts/>
-  <div v-if="!productsStore.areProductsLoading" class="flex flex-wrap justify-between gap-5 mt-8">
+  <div v-if="!productsStore.areProductsLoading" class="grid grid-cols-3 justify-between gap-x-5 gap-y-12 mt-8">
   <ProductsList />
   </div>
   <TheLoader v-else/>
