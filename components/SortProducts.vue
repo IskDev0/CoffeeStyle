@@ -43,9 +43,9 @@ const sortByPrice = (priceSelect:number) => {
 
 const sortByDate = () => {
   if (newnessSelect.value == "new") {
-    productsStore.sortedProducts?.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+    productsStore.sortedProducts?.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).reverse()
   }else {
-    productsStore.sortedProducts?.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).reverse();
+    productsStore.sortedProducts?.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
   }
 }
 </script>

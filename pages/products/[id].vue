@@ -5,7 +5,7 @@
       <div>
     <p class="font-bold text-3xl">{{currentProduct.title }}</p>
         <p class="pt-8 opacity-70">{{currentProduct.description}}</p>
-        <p class="py-6 text-xl">${{currentProduct.price}} USD</p>
+        <p class="py-6 text-[#A25F4B] text-xl flex gap-4">${{ discountedPrice}} USD<span class="text-[#1D1F2E66] opacity-40 line-through" v-if="currentProduct.discount">${{currentProduct.price.toFixed(2)}} USD</span></p>
 
         <div class="flex items-center justify-between">
         <div class="flex gap-4 text-2xl">
@@ -93,6 +93,9 @@ const closeAlert = () => {
   isAdded.value = false
 }
 
+const discountedPrice = computed(() => {
+  return (currentProduct.value!.price - (currentProduct.value!.price * (currentProduct.value!.discount / 100)))
+})
 
 onMounted(() => {
   getCurrentProduct()

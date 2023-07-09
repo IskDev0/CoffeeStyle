@@ -86,7 +86,9 @@ const updateProduct = async () => {
         .from('product_images')
         .remove([`images/${imageName}`])
 
-    await uploadImage()
+    if (file.value){
+      await uploadImage()
+    }
 
     const { data, error } = await supabase
         .from('products')
