@@ -1,18 +1,29 @@
 <template>
-  <section class="w-1/2 mx-auto">
-  <form class="flex flex-col gap-4" @submit.prevent v-if="currentEditProduct">
+  <section v-if="!isLoading" class="flex flex-col justify-center items-center">
+  <form class="flex flex-col gap-4 w-1/2 mt-16" @submit.prevent v-if="currentEditProduct">
     <input class="border-2 border-black p-2 rounded-md" v-model="currentEditProduct.title" type="text" placeholder="Title">
     <input class="border-2 border-black p-2 rounded-md" v-model="currentEditProduct.price" type="number" placeholder="Price">
     <textarea class="border-2 border-black p-2 rounded-md h-48" v-model="currentEditProduct.description" type="text" placeholder="Description"/>
     <input class="border-2 border-black p-2 rounded-md" v-model="currentEditProduct.discount" type="number" placeholder="Discount">
-    <button @click="updateProduct">Update</button>
+    <div class="flex justify-center">
+      <img class="h-32 w-32" :src="previewImage ? previewImage : currentEditProduct.image" alt="Preview image">
+      <input @change="selectFile"
+             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
+             id="file_input" type="file">
+    </div>
+    <MainButton size="expand" color="blue" @click="updateProduct">Update</MainButton>
   </form>
   </section>
-  <LoadingPopup v-if="isLoading"/>
+  <LoadingPopup v-else/>
 </template>
 
 <script setup lang="ts">
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";
+import MainButton from "~/components/UI/MainButton.vue";
+
+definePageMeta({
+  layout: "admin_product"
+})
 
 const route = useRoute()
 const router = useRouter()
@@ -35,9 +46,37 @@ const getCurrentEditProduct = async () => {
 
 }
 
+const previewImage = ref()
+
+const file = ref()
+
+const fileUrl = ref()
+
+const uploadImage = async () => {
+  const {data, error} = await supabase.storage
+      .from('product_images')
+      .upload(`/images/${file.value.name}`, file.value)
+
+  if (error) {
+    console.error('Ошибка загрузки файла:', error.message)
+  } else {
+    fileUrl.value = supabase.storage
+        .from('product_images')
+        .getPublicUrl(data.path)
+  }
+  currentEditProduct.value!.image = fileUrl.value.data.publicUrl
+}
+
+const selectFile = (e: { target: { files: any[]; }; }) => {
+  file.value = e.target.files[0]
+  const previewFile = e.target.files[0]
+  previewImage.value = URL.createObjectURL(previewFile)
+}
+
 const updateProduct = async () => {
 
   try {
+    await uploadImage()
     isLoading.value = true
     const { data, error } = await supabase
         .from('products')
@@ -52,9 +91,6 @@ const updateProduct = async () => {
   }finally {
     isLoading.value = false
   }
-
-
-
 }
 
 onMounted(() => {

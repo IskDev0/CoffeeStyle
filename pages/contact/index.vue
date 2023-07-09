@@ -33,7 +33,7 @@
       <textarea class="border-2 border-[#1D1F2E] rounded-md p-3" v-model="formData.message" type="email" id="message"/>
       <span class="text-red-500" v-for="error in $v.message.$errors" :key="error.$uid">{{error.$message}}</span>
     </div>
-    <MainButton class="w-full" color="blue">Submit</MainButton>
+    <MainButton size="expand" color="blue">Submit</MainButton>
   </form>
 </section>
 </template>

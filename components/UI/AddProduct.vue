@@ -29,7 +29,7 @@
                id="file_input" type="file">
       </div>
       <span class="text-red-500" v-if="isFileUploaded">Please select a file</span>
-      <MainButton class="w-full rounded-md" color="blue">Add</MainButton>
+      <MainButton size="expand" color="blue">Add</MainButton>
     </form>
   </div>
 </template>
