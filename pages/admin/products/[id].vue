@@ -1,6 +1,7 @@
 <template>
-  <section v-if="!isLoading" class="flex flex-col justify-center items-center">
-  <form class="flex flex-col gap-4 w-1/2 mt-16" @submit.prevent v-if="currentEditProduct">
+  <section class="flex flex-col justify-center items-center">
+    <div v-if="currentEditProduct" class="w-1/2">
+  <form class="flex flex-col gap-4 mt-16" @submit.prevent>
     <input class="border-2 border-black p-2 rounded-md" v-model="currentEditProduct.title" type="text" placeholder="Title">
     <input class="border-2 border-black p-2 rounded-md" v-model="currentEditProduct.price" type="number" placeholder="Price">
     <textarea class="border-2 border-black p-2 rounded-md h-48" v-model="currentEditProduct.description" type="text" placeholder="Description"/>
@@ -13,8 +14,9 @@
     </div>
     <MainButton size="expand" color="blue" @click="updateProduct">Update</MainButton>
   </form>
+    </div>
   </section>
-  <LoadingPopup v-else/>
+  <LoadingPopup v-if="isLoading"/>
 </template>
 
 <script setup lang="ts">
@@ -22,7 +24,7 @@ import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 import MainButton from "~/components/UI/MainButton.vue";
 
 definePageMeta({
-  layout: "admin_product"
+  layout: "admin-product"
 })
 
 const route = useRoute()
@@ -76,8 +78,16 @@ const selectFile = (e: { target: { files: any[]; }; }) => {
 const updateProduct = async () => {
 
   try {
-    await uploadImage()
     isLoading.value = true
+    const imageName = currentEditProduct.value!.image.replace("https://ssusfaxxsolkavabffjm.supabase.co/storage/v1/object/public/product_images/images/", "")
+
+    await supabase
+        .storage
+        .from('product_images')
+        .remove([`images/${imageName}`])
+
+    await uploadImage()
+
     const { data, error } = await supabase
         .from('products')
         .update(currentEditProduct.value)

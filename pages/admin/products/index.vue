@@ -73,13 +73,19 @@ const deleteProduct = async (product: ProductType) => {
 
     loadingStore.isActionLoading = true
 
-    const {error} = await supabase
+    await supabase
         .from('products')
         .delete()
         .eq('id', product.id)
 
-  }catch (e) {
-    console.log(e)
+  const imageName = product.image.replace("https://ssusfaxxsolkavabffjm.supabase.co/storage/v1/object/public/product_images/images/", "")
+
+    const { data, error } = await supabase
+        .storage
+        .from('product_images')
+        .remove([`images/${imageName}`])
+  }catch (error) {
+    console.log(error)
   }finally {
     loadingStore.isActionLoading = false
   }
