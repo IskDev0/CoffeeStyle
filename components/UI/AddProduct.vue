@@ -112,18 +112,24 @@ const addProduct = async (): Promise<void> => {
 
     await uploadImage()
 
-      const {error} = await supabase
-          .from('products')
-          .upsert([{
-            title: addProductData.value.title,
-            price: addProductData.value.price,
-            description: addProductData.value.description,
-            discount: addProductData.value.discount ? addProductData.value.discount : null,
-            image: fileUrl.value.data.publicUrl
-          }])
+      try {
+        const {error} = await supabase
+            .from('products')
+            .upsert([{
+              title: addProductData.value.title,
+              price: addProductData.value.price,
+              description: addProductData.value.description,
+              discount: addProductData.value.discount ? addProductData.value.discount : null,
+              image: fileUrl.value.data.publicUrl
+            }])
 
-      if (error) {
-        console.error('Ошибка вставки данных:', error.message)
+        if (error) {
+          console.error('Ошибка вставки данных:', error.message)
+        }
+      }catch (e){
+        console.log(e)
+      }finally {
+
       }
 
       handlePopup(false)

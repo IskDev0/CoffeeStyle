@@ -1,6 +1,6 @@
 <template>
   <div class="w-1/2 mx-auto pt-24">
-    <div class="flex flex-wrap gap-x-5 gap-y-12">
+    <div class="grid grid-cols-3 gap-x-5 gap-y-12">
       <ProductItem
           :product="product"
           v-for="product in homeProducts"
