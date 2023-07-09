@@ -36,23 +36,28 @@
 
 <script setup lang="ts">
 import MainButton from "~/components/UI/MainButton.vue";
-import {helpers, required} from "@vuelidate/validators";
+import {required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import {useLoadingStore} from "~/stores/loading";
 
 defineProps({
   isPopupLoading: {
     required: true,
     type: Boolean
-  }
+  },
 })
+
+const loadingStore = useLoadingStore()
+
+const supabase = useSupabaseClient()
 
 const previewImage = ref<string>()
 
 const file = ref()
 
-const isFileUploaded = ref<boolean>(false)
+const fileUrl = ref()
 
-const supabase = useSupabaseClient()
+const isFileUploaded = ref<boolean>(false)
 
 const addProductData = ref({
   title: "",
@@ -71,12 +76,11 @@ const rules = computed(() => {
 
 const $v = useVuelidate(rules, addProductData)
 
-const emit = defineEmits(["open"])
+const emit = defineEmits(["open", "openAction"])
 
 const handlePopup = (type: boolean) => {
   emit("open", type)
 }
-
 
 const selectFile = (e: { target: { files: any[]; }; }) => {
   file.value = e.target.files[0]
@@ -84,8 +88,6 @@ const selectFile = (e: { target: { files: any[]; }; }) => {
   previewImage.value = URL.createObjectURL(previewFile)
   console.log(file.value)
 }
-
-const fileUrl = ref()
 
 const uploadImage = async () => {
   const {data, error} = await supabase.storage
@@ -110,32 +112,40 @@ const addProduct = async (): Promise<void> => {
 
   if (previewImage.value) {
 
-    await uploadImage()
+    try {
 
-      try {
-        const {error} = await supabase
-            .from('products')
-            .upsert([{
-              title: addProductData.value.title,
-              price: addProductData.value.price,
-              description: addProductData.value.description,
-              discount: addProductData.value.discount ? addProductData.value.discount : null,
-              image: fileUrl.value.data.publicUrl
-            }])
+      loadingStore.isActionLoading = true
 
-        if (error) {
-          console.error('Ошибка вставки данных:', error.message)
-        }
-      }catch (e){
-        console.log(e)
-      }finally {
+      await uploadImage()
 
+      const {error} = await supabase
+          .from('products')
+          .upsert([{
+            title: addProductData.value.title,
+            price: addProductData.value.price,
+            description: addProductData.value.description,
+            discount: addProductData.value.discount ? addProductData.value.discount : null,
+            image: fileUrl.value.data.publicUrl
+          }])
+
+      if (error) {
+        console.error('Ошибка вставки данных:', error.message)
       }
 
-      handlePopup(false)
+      addProductData.value = {
+        title: "",
+        price: "",
+        description: "",
+        discount: "",
+      }
+    } catch (e) {
+      console.log(e)
+    } finally {
+      loadingStore.isActionLoading = false
     }
 
-  else {
+    handlePopup(false)
+  } else {
     isFileUploaded.value = true
   }
 }

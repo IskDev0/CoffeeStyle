@@ -9,24 +9,29 @@
           <h1 class="font-semibold">{{ adminProduct.title }}</h1>
         </div>
         <div class="flex items-center gap-6 mr-6">
-          <img @click="editProduct(adminProduct)" src="/edit.svg" alt="edit">
-          <img @click="deleteProduct(adminProduct)" src="/delete.svg" alt="delete">
+          <img class="cursor-pointer" @click="editProduct(adminProduct)" src="/edit.svg" alt="edit">
+          <img class="cursor-pointer" @click="deleteProduct(adminProduct)" src="/delete.svg" alt="delete">
         </div>
       </div>
     </div>
   </section>
   <div v-else class="h-screen flex flex-col justify-center items-center">
-    <TheLoader />
+   <TheLoader/>
   </div>
+  <ActionSpinner v-if="loadingStore.isActionLoading"/>
 </template>
 
 <script setup lang="ts">
-import TheLoader from "~/components/UI/TheLoader.vue";
 import AddProduct from "~/components/UI/AddProduct.vue";
+import ActionSpinner from "~/components/UI/ActionSpinner.vue";
+import TheLoader from "~/components/UI/TheLoader.vue";
+import {useLoadingStore} from "~/stores/loading";
 
 definePageMeta({
   layout: "admin"
 })
+
+const loadingStore = useLoadingStore()
 
 const openFormPopup = (type: boolean) => {
   isPopupLoading.value = type
@@ -35,8 +40,6 @@ const openFormPopup = (type: boolean) => {
 const supabase = useSupabaseClient()
 
 const router = useRouter()
-
-const route = useRoute()
 
 const isPopupLoading = ref<boolean>(false)
 
@@ -52,7 +55,7 @@ const loadAdminProducts = async () => {
         .from('products')
         .select('*')
 
-    adminProducts.value = products.reverse()
+    adminProducts.value = products!.reverse()
   } catch (e) {
     console.log(e)
   } finally {
@@ -66,54 +69,55 @@ const editProduct = (product: ProductType): void => {
 
 const deleteProduct = async (product: ProductType) => {
 
-
   try {
-    isLoading.value = true
+
+    loadingStore.isActionLoading = true
+
     const {error} = await supabase
         .from('products')
         .delete()
         .eq('id', product.id)
-  }catch (e) {
 
+  }catch (e) {
+    console.log(e)
   }finally {
-    isLoading.value = false
+    loadingStore.isActionLoading = false
   }
 
 }
-loadAdminProducts()
-
 
 onMounted(() => {
-
   loadAdminProducts()
 
-  const subscription = supabase
-      .channel('table-db-changes')
-      .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'products',
-          },
-          (payload) => {
-            if (payload.eventType  === "INSERT"){
-              adminProducts.value.unshift(payload.new)
-            }else if (payload.eventType === "DELETE"){
-              adminProducts.value = adminProducts.value.filter(item => item.id != payload.old.id)
-            }
-            else if (payload.eventType === 'UPDATE') {
-              const index = adminProducts.value.findIndex(d => d.id === payload.new.id)
-              if (index !== -1) {
-                adminProducts.value[index] = payload.new
-              }
-            }
-          },
-          loadAdminProducts()
-      )
-      .subscribe()
+  const channel = supabase.channel('table-db-changes')
 
+  const subscription = channel.on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'products',
+      },
+      (payload) => {
+        if (payload.eventType === 'INSERT') {
+          adminProducts.value.unshift(payload.new)
+        } else if (payload.eventType === 'DELETE') {
+          adminProducts.value = adminProducts.value.filter(item => item.id !== payload.old.id)
+        } else if (payload.eventType === 'UPDATE') {
+          const index = adminProducts.value.findIndex(d => d.id === payload.new.id)
+          if (index !== -1) {
+            adminProducts.value[index] = payload.new
+          }
+        }
+        console.log(payload)
+      }
+  )
 
+  channel.subscribe()
+
+  onUnmounted(() => {
+    channel.unsubscribe()
+  })
 })
 
 </script>
