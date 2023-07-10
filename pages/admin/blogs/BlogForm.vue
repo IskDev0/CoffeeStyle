@@ -32,18 +32,23 @@
       <MainButton type="submit" color="blue" size="expand">Submit</MainButton>
     </form>
   </div>
+  <ActionSpinner v-if="loadingStore.isActionLoading" />
 </section>
 </template>
 
 <script setup lang="ts">
 import Editor from '@tinymce/tinymce-vue'
 import MainButton from "~/components/UI/MainButton.vue";
+import {useLoadingStore} from "~/stores/loading";
+import ActionSpinner from "~/components/UI/ActionSpinner.vue";
 
 definePageMeta({
   layout: "admin"
 })
 
 const router = useRouter()
+
+const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
@@ -85,29 +90,36 @@ const uploadPost = async () => {
 
   if (previewImage.value) {
 
-    await uploadImage()
 
-    const {data, error} = await supabase
-        .from('blogs')
-        .insert([
-          {
-            head: blogData.value.head,
-            body_short: blogData.value.body_short,
-            body: blogData.value.body,
-            image: fileUrl.value.data.publicUrl
-          },
-        ])
-        .select()
+    try {
+      loadingStore.isActionLoading = true
+      await uploadImage()
+      const {data, error} = await supabase
+          .from('blogs')
+          .insert([
+            {
+              head: blogData.value.head,
+              body_short: blogData.value.body_short,
+              body: blogData.value.body,
+              image: fileUrl.value.data.publicUrl
+            },
+          ])
+          .select()
 
-    blogData.value = {
-      head: "",
-      body_short: "",
-      body: ""
+      blogData.value = {
+        head: "",
+        body_short: "",
+        body: ""
+      }
+      file.value = ""
+      previewImage.value = ""
+
+      router.replace("/admin/blogs")
+    }catch (e) {
+
+    }finally {
+      loadingStore.isActionLoading = false
     }
-    file.value = ""
-    previewImage.value = ""
-
-    router.replace("/admin/blogs")
 
   }
 }
