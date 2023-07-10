@@ -54,8 +54,9 @@ const loadAdminProducts = async () => {
     let {data: products, error} = await supabase
         .from('products')
         .select('*')
+        .order('created_at', { ascending: false })
 
-    adminProducts.value = products!.reverse()
+    adminProducts.value = products
   } catch (e) {
     console.log(e)
   } finally {
@@ -115,7 +116,6 @@ onMounted(() => {
             adminProducts.value[index] = payload.new
           }
         }
-        console.log(payload)
       }
   )
 

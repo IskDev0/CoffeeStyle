@@ -86,7 +86,6 @@ const selectFile = (e: { target: { files: any[]; }; }) => {
   file.value = e.target.files[0]
   const previewFile = e.target.files[0]
   previewImage.value = URL.createObjectURL(previewFile)
-  console.log(file.value)
 }
 
 const uploadImage = async () => {
@@ -138,6 +137,8 @@ const addProduct = async (): Promise<void> => {
         description: "",
         discount: "",
       }
+      file.value = ""
+      previewImage.value = ""
     } catch (e) {
       console.log(e)
     } finally {

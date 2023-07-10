@@ -23,6 +23,7 @@ const loadProducts = async () => {
     let {data: productsList, error} = await supabase
         .from('products')
         .select('*')
+        .order('created_at', { ascending: false })
 
     productsStore.areProductsLoading = true
 
