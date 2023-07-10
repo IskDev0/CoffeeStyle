@@ -27,7 +27,9 @@
 
       </div>
     </TransitionGroup>
+    <div class="flex flex-col items-end">
     <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice.toFixed(2) }}</h1>
+    </div>
   </div>
   <div v-else>
     <h1 class="text-3xl text-center font-bold mt-10">Cart is empty</h1>
@@ -36,6 +38,7 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart";
+import MainButton from "~/components/UI/MainButton.vue";
 
 const cartStore = useCartStore()
 

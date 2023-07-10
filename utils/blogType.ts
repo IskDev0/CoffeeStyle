@@ -1,5 +1,5 @@
 type BlogType = {
-    id: number,
+    id: string,
     head: string,
     body_short: string,
     body: string,
