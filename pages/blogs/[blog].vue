@@ -46,21 +46,21 @@ onMounted(() => {
 
 <style>
 .content h1 {
-  @apply text-4xl font-bold
+  @apply text-4xl font-bold pb-4
 }
 .content h2 {
-  @apply text-3xl font-bold
+  @apply text-3xl font-bold pb-4
 }
 .content h3 {
-  @apply text-2xl font-bold
+  @apply text-2xl font-bold pb-4
 }
 .content h4 {
-  @apply text-xl font-bold
+  @apply text-xl font-bold pb-4
 }
 .content h5 {
-  @apply text-xs font-bold
+  @apply text-xs font-bold pb-4
 }
 .content p {
-  @apply opacity-80
+  @apply opacity-80 pb-4
 }
 </style>

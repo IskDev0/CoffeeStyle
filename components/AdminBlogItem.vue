@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex items-center gap-4 mr-6">
-      <img class="cursor-pointer" src="/edit.svg" alt="edit">
+      <img @click="updateBlogItem(adminBlog)" class="cursor-pointer" src="/edit.svg" alt="edit">
       <img @click="deleteBlogItem(adminBlog)" class="cursor-pointer" src="/delete.svg" alt="delete">
     </div>
   </article>
@@ -21,6 +21,8 @@ import {PropType} from "@vue/runtime-core";
 import {useLoadingStore} from "~/stores/loading";
 
 const loadingStore = useLoadingStore()
+
+const router = useRouter()
 
 const props = defineProps({
   adminBlog: {
@@ -62,6 +64,10 @@ const deleteBlogItem = async (blogItem:BlogType): Promise<void> => {
  }finally {
    loadingStore.isActionLoading = false
  }
+}
+
+const updateBlogItem = (blog:BlogType):void => {
+  router.push(`/admin/blogs/${blog.id}`)
 }
 
 </script>
