@@ -23,6 +23,12 @@
             :api-key="key"
         />
       </ClientOnly>
+      <div class="flex justify-center">
+        <img class="h-32 w-32" :src="previewImage ? previewImage : '/placeholder.png'" alt="Preview image">
+        <input @change="selectFile"
+               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none"
+               id="file_input" type="file">
+      </div>
       <MainButton type="submit" color="blue" size="expand">Submit</MainButton>
     </form>
   </div>
@@ -37,9 +43,37 @@ definePageMeta({
   layout: "admin"
 })
 
+const router = useRouter()
+
 const supabase = useSupabaseClient()
 
 const key = import.meta.env.VITE_TINYMCE_API
+
+const previewImage = ref<string>()
+
+const file = ref()
+
+const fileUrl = ref()
+
+const selectFile = (e: { target: { files: any[]; }; }) => {
+  file.value = e.target.files[0]
+  const previewFile = e.target.files[0]
+  previewImage.value = URL.createObjectURL(previewFile)
+}
+
+const uploadImage = async () => {
+  const {data, error} = await supabase.storage
+      .from('blog_images')
+      .upload(`/images/${file.value.name}`, file.value)
+
+  if (error) {
+    console.error('Ошибка загрузки файла:', error.message)
+  } else {
+    fileUrl.value = supabase.storage
+        .from('blog_images')
+        .getPublicUrl(data.path)
+  }
+}
 
 const blogData = ref({
   head: "",
@@ -49,23 +83,33 @@ const blogData = ref({
 
 const uploadPost = async () => {
 
-  const { data, error } = await supabase
-      .from('blogs')
-      .insert([
-        {
-          head: blogData.value.head,
-          body_short: blogData.value.body_short,
-          body: blogData.value.body
-        },
-      ])
-      .select()
+  if (previewImage.value) {
 
-  blogData.value.head = ""
-  blogData.value.body_short = ""
-  blogData.value.body = ""
+    await uploadImage()
 
-  console.log("cock")
+    const {data, error} = await supabase
+        .from('blogs')
+        .insert([
+          {
+            head: blogData.value.head,
+            body_short: blogData.value.body_short,
+            body: blogData.value.body,
+            image: fileUrl.value.data.publicUrl
+          },
+        ])
+        .select()
 
+    blogData.value = {
+      head: "",
+      body_short: "",
+      body: ""
+    }
+    file.value = ""
+    previewImage.value = ""
+
+    router.replace("/admin/blogs")
+
+  }
 }
 
 </script>
