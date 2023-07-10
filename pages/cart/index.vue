@@ -16,7 +16,7 @@
           <p>{{ cartItem.quantity }}</p>
           <button @click="cartItem.quantity++">+</button>
         </div>
-        <p>${{ cartItem.price * cartItem.quantity }}</p>
+        <p>${{ ((cartItem.price - cartItem.price * (cartItem.discount / 100)) * cartItem.quantity).toFixed(2) }}</p>
         <button class="flex justify-end pr-10" @click="deleteItemFromCart(cartItem)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -27,7 +27,7 @@
 
       </div>
     </TransitionGroup>
-    <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice }}</h1>
+    <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice.toFixed(2) }}</h1>
   </div>
   <div v-else>
     <h1 class="text-3xl text-center font-bold mt-10">Cart is empty</h1>
@@ -48,7 +48,8 @@ const decrease = (cartItem: CartProductType): void => {
 const totalPrice = computed((): number => {
   let total = 0;
   for (let cartItem in cartStore.cartProducts) {
-    total += cartStore.cartProducts[cartItem].price * cartStore.cartProducts[cartItem].quantity
+    let item = cartStore.cartProducts[cartItem];
+    total += (item.price - item.price * (item.discount / 100)) * item.quantity
   }
   return total
 })
