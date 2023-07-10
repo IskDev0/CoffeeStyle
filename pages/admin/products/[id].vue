@@ -24,7 +24,7 @@ import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 import MainButton from "~/components/UI/MainButton.vue";
 
 definePageMeta({
-  layout: "admin-product"
+  layout: "empty"
 })
 
 const route = useRoute()

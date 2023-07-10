@@ -3,7 +3,7 @@
     <div class="flex flex-col">
 <h1 class="text-3xl font-bold">{{currentBlog.head}}</h1>
   <h2 class="flex items-center justify-between text-xl">{{currentBlog.body_short}}   <span class="tracking-wider uppercase text-xs">{{blogDate}}</span></h2>
-    <p class="mt-10 opacity-70">{{currentBlog.body}}</p>
+    <div class="mt-10 content" v-html="currentBlog.body"></div>
     </div>
   </section>
   <TheLoader v-else/>
@@ -43,3 +43,24 @@ onMounted(() => {
   loadCurrentBlog()
 })
 </script>
+
+<style>
+.content h1 {
+  @apply text-4xl font-bold
+}
+.content h2 {
+  @apply text-3xl font-bold
+}
+.content h3 {
+  @apply text-2xl font-bold
+}
+.content h4 {
+  @apply text-xl font-bold
+}
+.content h5 {
+  @apply text-xs font-bold
+}
+.content p {
+  @apply opacity-80
+}
+</style>

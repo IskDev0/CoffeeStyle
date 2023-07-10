@@ -9,8 +9,8 @@
     </div>
 
     <div class="flex items-center gap-4 mr-6">
-      <img src="/edit.svg" alt="edit">
-      <img src="/delete.svg" alt="delete">
+      <img class="cursor-pointer" src="/edit.svg" alt="edit">
+      <img class="cursor-pointer" src="/delete.svg" alt="delete">
     </div>
   </article>
 </template>
