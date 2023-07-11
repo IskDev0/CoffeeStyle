@@ -63,4 +63,10 @@ onMounted(() => {
 .content p {
   @apply opacity-80 pb-4
 }
+.content ol {
+  @apply list-decimal
+}
+.content ul {
+  @apply list-disc
+}
 </style>

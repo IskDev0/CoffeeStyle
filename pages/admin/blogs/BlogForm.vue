@@ -7,18 +7,22 @@
   <input v-model="blogData.body_short" class="border-2 border-black p-2 rounded-md" type="text" placeholder="Post short body">
       <ClientOnly>
         <Editor
+            v-if="editorLoaded"
             class="h-96"
             v-model="blogData.body"
             :init="{
           toolbar: [
     { name: 'history', items: [ 'undo', 'redo' ] },
     { name: 'styles', items: [ 'styles' ] },
-    { name: 'formatting', items: [ 'bold', 'italic' ] },
+    { name: 'formatting', items: [ 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5'] },
     { name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ] },
     { name: 'indentation', items: [ 'outdent', 'indent' ] },
-    {name: 'lists', items: ['numlist', 'bullist']}
+    {name: 'lists', items: ['numlist', 'bullist']},
+    {name: 'link', items: ['link']},
+    {name: 'image', items: ['image']},
+    {name: 'table', items: ['table']}
   ],
-        plugins: ['lists', 'link', 'image', 'table', 'code', 'help', 'wordcount', 'numlist' ,'bullist']
+        plugins: ['lists', 'link', 'image', 'table', 'code', 'help', 'wordcount']
       }"
             :api-key="key"
         />
@@ -53,6 +57,8 @@ const loadingStore = useLoadingStore()
 const supabase = useSupabaseClient()
 
 const key = import.meta.env.VITE_TINYMCE_API
+
+const editorLoaded = ref<boolean>(false)
 
 const previewImage = ref<string>()
 
@@ -123,5 +129,6 @@ const uploadPost = async () => {
 
   }
 }
+
 
 </script>

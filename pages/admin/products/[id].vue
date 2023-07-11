@@ -16,12 +16,16 @@
   </form>
     </div>
   </section>
-  <LoadingPopup v-if="isLoading"/>
+  <div v-if="loadingStore.isActionLoading" class="flex flex-col items-center justify-center h-screen">
+  <TheLoader/>
+  </div>
 </template>
 
 <script setup lang="ts">
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 import MainButton from "~/components/UI/MainButton.vue";
+import {useLoadingStore} from "~/stores/loading";
+import TheLoader from "~/components/UI/TheLoader.vue";
 
 definePageMeta({
   layout: "empty"
@@ -29,6 +33,8 @@ definePageMeta({
 
 const route = useRoute()
 const router = useRouter()
+
+const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
@@ -38,13 +44,20 @@ const currentEditProduct = ref<ProductType>()
 
 const getCurrentEditProduct = async () => {
 
-  let { data: product, error } = await supabase
-      .from('products')
-      .select("*")
-      .eq('id', route.params.id)
-      .single()
+  try {
+    loadingStore.isActionLoading = true
+    let { data: product, error } = await supabase
+        .from('products')
+        .select("*")
+        .eq('id', route.params.id)
+        .single()
 
-  currentEditProduct.value = product
+    currentEditProduct.value = product
+  }catch (error){
+    console.error(error)
+  }finally {
+    loadingStore.isActionLoading = false
+  }
 
 }
 

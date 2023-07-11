@@ -1,10 +1,16 @@
 <template>
   <section class="mt-10 mx-6" v-if="currentEditBlogItem">
-    <NuxtLink class="inline-flex gap-2 bg-gray-100 py-2 px-4 rounded-md font-bold" to="/admin/blogs"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160 160-480l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/></svg><span>Back</span></NuxtLink>
+    <NuxtLink class="inline-flex gap-2 bg-gray-100 py-2 px-4 rounded-md font-bold" to="/admin/blogs">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+        <path d="M480-160 160-480l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/>
+      </svg>
+      <span>Back</span></NuxtLink>
     <div class="flex flex-col gap-6 mt-10">
       <form @submit.prevent="updateBlog" class="flex flex-col gap-4">
-        <input v-model="currentEditBlogItem.head" class="border-2 border-black p-2 rounded-md" type="text" placeholder="Post head">
-        <input v-model="currentEditBlogItem.body_short" class="border-2 border-black p-2 rounded-md" type="text" placeholder="Post short body">
+        <input v-model="currentEditBlogItem.head" class="border-2 border-black p-2 rounded-md" type="text"
+               placeholder="Post head">
+        <input v-model="currentEditBlogItem.body_short" class="border-2 border-black p-2 rounded-md" type="text"
+               placeholder="Post short body">
         <ClientOnly>
           <Editor
               class="h-96"
@@ -32,20 +38,19 @@
         <MainButton type="submit" color="blue" size="expand">Submit</MainButton>
       </form>
     </div>
-    <ActionSpinner v-if="loadingStore.isActionLoading" />
   </section>
+  <ActionSpinner v-if="loadingStore.isActionLoading"/>
 </template>
 
 <script setup lang="ts">
 import ActionSpinner from "~/components/UI/ActionSpinner.vue";
 import Editor from "@tinymce/tinymce-vue";
+import {useLoadingStore} from "~/stores/loading";
+import MainButton from "~/components/UI/MainButton.vue";
 
 definePageMeta({
   layout: "empty"
 })
-
-import {useLoadingStore} from "~/stores/loading";
-import MainButton from "~/components/UI/MainButton.vue";
 
 const loadingStore = useLoadingStore()
 
@@ -68,13 +73,20 @@ const supabase = useSupabaseClient()
 
 const getCurrentEditBlog = async () => {
 
-  let { data: blogs, error } = await supabase
-      .from('blogs')
-      .select("*")
-      .eq('id', route.params.id)
-      .single()
+  try {
+    loadingStore.isActionLoading = true
+    let {data: blogs, error} = await supabase
+        .from('blogs')
+        .select("*")
+        .eq('id', route.params.id)
+        .single()
 
-  currentEditBlogItem.value = blogs
+    currentEditBlogItem.value = blogs
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loadingStore.isActionLoading = false
+  }
 }
 
 const updateBlog = async () => {
@@ -83,13 +95,13 @@ const updateBlog = async () => {
 
   if (file.value) {
 
-  await supabase
-      .storage
-      .from('product_images')
-      .remove([`images/${imageName}`])
+    await supabase
+        .storage
+        .from('product_images')
+        .remove([`images/${imageName}`])
   }
 
-  const { data, error } = await supabase
+  const {data, error} = await supabase
       .from('blogs')
       .update(currentEditBlogItem.value)
       .eq('id', route.params.id)
