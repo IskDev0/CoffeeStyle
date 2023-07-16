@@ -12,11 +12,13 @@
     <button @click="deleteAddress(address)"><img src="/delete.svg" alt=""></button>
   </div>
   </div>
-  <AddAddress />
+  <AddAddress @open="openLoadingPopup(value)"/>
+  <LoadingPopup v-if="isLoading" />
 </template>
 
 <script setup lang="ts">
 import AddAddress from "~/components/AddAddress.vue";
+import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 
 definePageMeta({
   layout: "profile"
@@ -25,27 +27,38 @@ definePageMeta({
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const doUserHaveAddress = ref(false)
+const isLoading = ref<boolean>(false)
 
-const addresses = ref()
+const addresses = ref<AddressType[]>([])
 
-const loadUserAddress = async () => {
+const openLoadingPopup = (value: boolean):void => {
+  isLoading.value = value
+}
+
+const loadUserAddress = async ():Promise<void> => {
 
   let { data: address, error } = await supabase
       .from('addresses')
       .select('*')
-      .filter('user_id', 'eq', user.value.id)
+      .filter('user_id', 'eq', user.value!.id)
 
   addresses.value = address
 
 }
 
-const deleteAddress = async (address) => {
+const deleteAddress = async (address:AddressType): Promise<void> => {
 
-  const { error } = await supabase
-      .from('addresses')
-      .delete()
-      .eq('id', address.id)
+ try {
+   isLoading.value = true
+   const { error } = await supabase
+       .from('addresses')
+       .delete()
+       .eq('id', address.id)
+ }catch (e){
+   console.log(e)
+ }finally {
+   isLoading.value = false
+ }
 
 }
 

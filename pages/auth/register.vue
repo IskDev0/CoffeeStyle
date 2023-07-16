@@ -58,11 +58,10 @@ const rules = computed(() => {
     lastName: {required},
     email: { required, email },
     password: {required, minLength: minLength(6)}
-
   };
 });
 
-const addUserToDB = async () => {
+const addUserToDB = async (): Promise<void> => {
 
   const { data, error } = await supabase
       .from('users')
@@ -80,7 +79,7 @@ const addUserToDB = async () => {
 
 const router = useRouter()
 
-const signUp = async () => {
+const signUp = async (): Promise<void> => {
   const result = await $v.value.$validate()
 
   try {
