@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!isLoading" class="w-1/2 mx-auto">
+  <section class="w-1/2 mx-auto">
     <form @submit.prevent="submitAuthForm" class="flex flex-col  gap-4">
       <label class="text-xs uppercase tracking-widest font-bold" for="email">Email</label>
       <input class="border-2 border-[#1D1F2E] rounded-md p-3" v-model="signFormData.email" type="email" id="email">
@@ -11,7 +11,10 @@
     </form>
     <span class="flex justify-center gap-2 mt-6">Dont have an account? <NuxtLink class="font-bold underline" to="/auth/register">Sign Up</NuxtLink></span>
   </section>
-  <TheLoader v-else/>
+
+      <LoadingPopup v-if="isLoading" />
+
+    <MessageAlert v-if="isError" :message="errorMessage" />
 </template>
 
 <script setup lang="ts">
@@ -24,6 +27,8 @@ const client = useSupabaseAuthClient()
 import {required, email, minLength} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import MainButton from "~/components/UI/MainButton.vue";
+import MessageAlert from "~/components/UI/MessageAlert.vue";
+import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 
 
 const signFormData = ref(
@@ -45,6 +50,10 @@ const rules = computed(() => {
 
 const isLoading = ref<boolean>(false)
 
+const isError = ref<boolean>()
+
+const errorMessage = ref<string>()
+
 const router = useRouter()
 
 const submitAuthForm = async () => {
@@ -52,18 +61,18 @@ const submitAuthForm = async () => {
 
   try {
     isLoading.value = true
+    isError.value = false
     const { data, error } = await client.auth.signInWithPassword({
       email: signFormData.value.email,
       password: signFormData.value.password,
     })
 
-    if (error) {
-      throw  error
-    }else {
-      router.replace("/profile")
-    }
+
+    if (error) throw error
+    else  router.replace("/profile")
   }catch (error){
-    console.log(error)
+    errorMessage.value = error.message
+    isError.value = true
   }finally {
     isLoading.value = false
   }

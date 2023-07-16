@@ -15,6 +15,10 @@
     </form>
     <span class="flex justify-center gap-2 mt-6">Already have an account? <NuxtLink class="font-bold underline" to="/auth/login">Sign In</NuxtLink></span>
   </section>
+
+        <LoadingPopup v-if="isLoading"/>
+
+  <MessageAlert v-if="isError" :message="errorMessage" />
 </template>
 
 <script setup lang="ts">
@@ -22,6 +26,8 @@
 import {required, email, minLength} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import MainButton from "~/components/UI/MainButton.vue";
+import MessageAlert from "~/components/UI/MessageAlert.vue";
+import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 
 
 const client = useSupabaseAuthClient()
@@ -30,7 +36,11 @@ const supabase = useSupabaseClient()
 
 const user = useSupabaseUser()
 
-const successMessage = ref<string>()
+const errorMessage = ref<string>()
+
+const isLoading = ref<boolean>(false)
+
+const isError = ref<boolean>(false)
 
 const registerFormData = ref(
     {
@@ -58,9 +68,10 @@ const addUserToDB = async () => {
       .from('users')
       .insert([
         {
+          id: user.value.id,
           first_name: registerFormData.value.firstName,
           last_name: registerFormData.value.lastName,
-          user: user.value
+          email: user.value.email
         },
       ])
       .select()
@@ -73,15 +84,19 @@ const signUp = async () => {
   const result = await $v.value.$validate()
 
   try {
+    isLoading.value = true
+    isError.value = false
     const {data, error} = await client.auth.signUp({
       email: registerFormData.value.email,
       password: registerFormData.value.password
     })
     await addUserToDB()
-    if (error) throw error
     router.replace("/profile")
+    if (error) throw error
   }catch (error){
-    console.log(error)
+    isLoading.value = false
+    isError.value = true
+    errorMessage.value = error.message
   }
 
   if (!result) return
