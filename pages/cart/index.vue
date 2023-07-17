@@ -29,6 +29,7 @@
     </TransitionGroup>
     <div class="flex flex-col items-end">
     <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice.toFixed(2) }}</h1>
+      <MainButton @click="checkOut" color="blue">Checkout</MainButton>
     </div>
   </div>
   <div v-else>
@@ -38,6 +39,8 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart";
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 import MainButton from "~/components/UI/MainButton.vue";
 
 const cartStore = useCartStore()
@@ -59,6 +62,22 @@ const totalPrice = computed((): number => {
 
 const deleteItemFromCart = (cartItem: CartProductType) => {
   cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
+}
+
+const checkOut = async () => {
+
+  const { data, error } = await supabase
+      .from('orders')
+      .insert([
+        {
+          status: "pending",
+          total: totalPrice.value,
+          user_id: user.value.id,
+          products: cartStore.cartProducts
+        },
+      ])
+      .select()
+
 }
 
 </script>
