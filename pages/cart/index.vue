@@ -70,7 +70,7 @@ const checkOut = async () => {
       .from('orders')
       .insert([
         {
-          status: "pending",
+          status: "Pending",
           total: totalPrice.value,
           user_id: user.value.id,
           products: cartStore.cartProducts

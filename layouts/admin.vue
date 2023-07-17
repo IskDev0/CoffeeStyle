@@ -5,7 +5,7 @@
           <NuxtLink class="py-2 px-4 hover:bg-gray-700" to="/">Home</NuxtLink>
           <NuxtLink class="py-2 px-4 hover:bg-gray-700" to="/admin/dashboard">Dashboard</NuxtLink>
           <NuxtLink class="py-2 px-4 hover:bg-gray-700" to="/admin/products">Products</NuxtLink>
-          <NuxtLink class="py-2 px-4 hover:bg-gray-700">Orders</NuxtLink>
+          <NuxtLink class="py-2 px-4 hover:bg-gray-700" to="/admin/orders">Orders</NuxtLink>
         <NuxtLink class="py-2 px-4 hover:bg-gray-700" to="/admin/blogs">Blogs</NuxtLink>
       </ul>
     </aside>
