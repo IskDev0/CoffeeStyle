@@ -4,7 +4,7 @@
   <p>{{currentUser.first_name}}</p>
   <p>{{currentUser.last_name}}</p>
   </div>
-  <p :class="orderStatus" class="min-w-0 text-yellow-400 font-semibold py-1 px-2 rounded-md w-24 text-center">{{adminOrder.status}}</p>
+  <p :class="orderStatus" class="min-w-0 font-semibold py-1 px-2 rounded-md w-24 text-center">{{adminOrder.status}}</p>
   <div class="flex flex-col gap-4">
   <div class="flex justify-between gap-4" v-for="product in adminOrder.products">
     <p>{{product.title}}</p>
@@ -32,15 +32,25 @@ const supabase = useSupabaseClient()
 
 const currentUser = ref()
 
+import {useLoadingStore} from "~/stores/loading";
+const loadingStore = useLoadingStore()
+
 const loadCurrentUser = async () => {
 
-  let { data: user, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('id', props.adminOrder.user_id)
-      .single()
+  try {
+    loadingStore.isActionLoading = true
+    let { data: user, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', props.adminOrder.user_id)
+        .single()
 
-  currentUser.value = user
+    currentUser.value = user
+  }catch (e) {
+
+  }finally {
+    loadingStore.isActionLoading = false
+  }
 }
 
 const orderDate = computed(() => {
