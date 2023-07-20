@@ -58,7 +58,7 @@ const supabase = useSupabaseClient()
 
 const key = import.meta.env.VITE_TINYMCE_API
 
-const editorLoaded = ref<boolean>(false)
+const editorLoaded = ref<boolean>(true)
 
 const previewImage = ref<string>()
 

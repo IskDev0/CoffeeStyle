@@ -1,9 +1,7 @@
 <template>
   <AdminOrdersSort/>
-<AdminOrdersList :admin-orders="adminStore.sortedAdminOrders" />
-  <div class="h-screen flex flex-col items-center justify-center">
+  <AdminOrdersList :admin-orders="adminStore.sortedAdminOrders"/>
   <TheLoader v-if="loadingStore.isActionLoading"/>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,18 +21,16 @@ const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
-const adminOrders = ref([])
-
 const loadAdminOrders = async () => {
 
-  let { data: orders, error } = await supabase
+  let {data: orders, error} = await supabase
       .from('orders')
       .select('*')
 
   adminStore.adminOrders = orders
 }
 
-onMounted(async ()=> {
+onMounted(async () => {
   await loadAdminOrders()
 
   adminStore.sortedAdminOrders = adminStore.adminOrders

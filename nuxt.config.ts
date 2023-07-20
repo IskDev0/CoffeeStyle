@@ -24,5 +24,6 @@ export default defineNuxtConfig({
   components: [
     { path: '~/components/UI', prefix: 'UI' },
     '~/components'
-  ]
+  ],
+  ssr: true
 })

@@ -4,7 +4,7 @@
       <button class="py-2 px-4 w-full text-start bg-gray-100" @click="toggleDropdown('country')">
         {{ addAddressForm.selectedCountry ? addAddressForm.selectedCountry.name : "Select country" }}
       </button>
-      <ul v-if="toggleCountry" class="flex flex-col absolute bg-gray-100 top-10 h-64 overflow-y-scroll">
+      <ul v-if="toggleCountry" class="bg-gray-100">
         <li
             class="cursor-pointer py-2 px-4 hover:bg-gray-200"
             @click="selectCountry(country)"

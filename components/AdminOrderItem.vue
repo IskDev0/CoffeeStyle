@@ -1,4 +1,5 @@
 <template>
+  <article @click="$router.push(`/admin/orders/${adminOrder.id}`)" class="cursor-pointer font-semibold">
 <div :class="{'bg-gray-100' : index % 2 === 0}" v-if="currentUser" class="grid grid-cols-5 justify-items-center items-center py-2 px-4 gap-8">
   <div class="flex gap-4">
   <p>{{currentUser.first_name}}</p>
@@ -13,8 +14,9 @@
 
 </div>
   <p>{{orderDate}}</p>
-  <p>{{(adminOrder.total).toFixed(2)}}$</p>
+  <p>${{(adminOrder.total).toFixed(2)}}</p>
 </div>
+  </article>
 </template>
 
 <script setup lang="ts">

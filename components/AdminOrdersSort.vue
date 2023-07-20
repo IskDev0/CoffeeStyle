@@ -9,7 +9,7 @@
     </select>
     <span>Products</span>
     <select class="bg-transparent" @change="sortByDate" v-model="newnessSelect">
-      <option selected value="All">All</option>
+      <option selected disabled>All</option>
       <option value="New">New</option>
       <option value="Old">Old</option>
     </select>
@@ -43,15 +43,15 @@ const sortByStatus = (): void => {
 const sortByDate = (): void => {
   if (newnessSelect.value === "New") {
     adminStore.sortedAdminOrders?.sort(
-        (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
   } else if (newnessSelect.value === "Old") {
     adminStore.sortedAdminOrders?.sort(
-        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
     );
   } else {
     adminStore.sortedAdminOrders = adminStore.sortedAdminOrders?.sort(
-        (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
   }
 };
