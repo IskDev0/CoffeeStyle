@@ -1,5 +1,5 @@
 <template>
-  <article @click="$router.push(`products/${product.id}`)" class="flex flex-col items-center text-center cursor-pointer sm:w-80">
+  <article @click="$router.push(`products/${product.id}`)" class="flex flex-col items-center text-center cursor-pointer sm:w-80 lg:w-full">
     <div class="relative">
       <span v-if="product.discount" class="absolute top-0 right-0 bg-red-400 text-white font-bold py-2 px-4 z-10">-{{product.discount}}%</span>
     <img class="relative h-96 w-80" :src="product.image" :alt="product.title">
