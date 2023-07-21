@@ -1,7 +1,7 @@
 <template>
-  <header class="flex items-center justify-between py-6 fixed top-0 right-0 left-0 z-20 bg-white shadow-xl px-20 text-[#1D1F2E]">
+  <header class="px-4 flex items-center justify-between py-6 fixed top-0 right-0 left-0 z-20 bg-white shadow-xl sm:px-20 text-[#1D1F2E]">
     <NuxtLink to="/"><img src="/logo.svg" alt="Logo"></NuxtLink>
-    <nav>
+    <nav class="hidden lg:block">
       <ul class="flex items-center gap-8">
         <li class="text-xs uppercase tracking-widest transition ease-in-out duration-300 relative hover-link">
           <NuxtLink to="/">Home</NuxtLink>
@@ -28,13 +28,21 @@
         </NuxtLink>
       </div>
       <NuxtLink to="/profile"><img src="/profile.svg" alt="user"></NuxtLink>
-    </div>
+        <button @click="$emit('open', true)" class="relative z-50 group lg:hidden">
+          <div class="flex flex-col gap-2">
+            <span class="h-[2px] bg-black w-6"></span>
+            <span class="h-[2px] bg-black w-6"></span>
+            <span class="h-[2px] bg-black w-6"></span>
+          </div>
+        </button>
+      </div>
   </header>
 </template>
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart";
 const cartStore = useCartStore()
+
 </script>
 
 <style>
