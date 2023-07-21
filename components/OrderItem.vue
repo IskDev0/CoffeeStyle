@@ -3,7 +3,7 @@
     <OrderDetailsList :order="order"/>
     <div class="flex justify-between mt-10">
     <p>{{orderDate}}</p>
-    <p class="font-bold">Total: {{(order.total).toFixed(2)}}$</p>
+    <p class="font-bold">Total: ${{(order.total).toFixed(2)}}</p>
     </div>
   </div>
 </template>

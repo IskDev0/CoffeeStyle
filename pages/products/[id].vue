@@ -1,8 +1,8 @@
 <template>
-  <section v-if="currentProduct" class="w-1/2 mx-auto">
-    <div class="flex items-start gap-20" v-if="currentProduct">
+  <section v-if="currentProduct" class="container mx-auto">
+    <div class="flex flex-col items-center md:flex-row items-start gap-20" v-if="currentProduct">
     <img class="h-96 w-80" :src="currentProduct.image" :alt="currentProduct.title">
-      <div>
+      <div class="md:w-1/2">
     <p class="font-bold text-3xl">{{currentProduct.title }}</p>
         <p class="pt-8 opacity-70">{{currentProduct.description}}</p>
         <p class="py-6 text-[#A25F4B] text-xl flex gap-4">${{ discountedPrice}} USD<span class="text-[#1D1F2E66] opacity-40 line-through" v-if="currentProduct.discount">${{currentProduct.price.toFixed(2)}} USD</span></p>

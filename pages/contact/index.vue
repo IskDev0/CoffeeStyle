@@ -1,5 +1,5 @@
 <template>
-<section class="w-1/2 mx-auto mt-12">
+<section class="container mx-auto mt-12 px-4">
   <h1 class="text-4xl font-bold text-center uppercase mb-12">Contact Us</h1>
   <form class="flex flex-col gap-4" @submit.prevent="submitForm">
     <div class="flex flex-col gap-3 ">

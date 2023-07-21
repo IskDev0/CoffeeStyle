@@ -1,5 +1,5 @@
 <template>
-  <section class="w-1/2 mx-auto" v-if="currentBlog">
+  <section class="container mx-auto" v-if="currentBlog">
     <div class="flex flex-col">
 <h1 class="text-3xl font-bold">{{currentBlog.head}}</h1>
   <h2 class="flex items-center justify-between text-xl">{{currentBlog.body_short}}   <span class="tracking-wider uppercase text-xs">{{blogDate}}</span></h2>

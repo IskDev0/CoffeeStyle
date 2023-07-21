@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto px-4">
     <h1 class="text-4xl font-bold text-center uppercase mb-12">About us</h1>
     <p class="mb-4">Morbi maximus vestibulum mi id mattis. Nam feugiat, magna vel porta venenatis, eros eros dapibus magna, at molestie ipsum nisl id enim. Nunc porttitor hendrerit porttitor. Donec ut libero bibendum, feugiat ipsum eget, tristique sapien. Vivamus orci turpis, convallis at commodo quis, volutpat porttitor quam. Curabitur mauris lacus, tempor congue varius ut, pretium sed arcu. Curabitur finibus est purus, ut efficitur metus dictum vitae. Nam elementum magna id erat pellentesque, eget dictum libero scelerisque. Suspendisse dignissim consectetur lacus eu tempor. Nam venenatis lacinia gravida. Vivamus nec dignissim lectus. Vestibulum eu elit at nulla commodo pulvinar.</p>
 
