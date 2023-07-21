@@ -39,7 +39,7 @@
       </form>
     </div>
   </section>
-  <ActionSpinner v-if="loadingStore.isActionLoading"/>
+  <ActionSpinner v-if="loadingStore.isActionLoading || isLoading"/>
 </template>
 
 <script setup lang="ts">
@@ -57,6 +57,8 @@ const loadingStore = useLoadingStore()
 const router = useRouter()
 
 const key = import.meta.env.VITE_TINYMCE_API
+
+const isLoading = ref(false)
 
 const file = ref("")
 const previewImage = ref("")
@@ -91,24 +93,31 @@ const getCurrentEditBlog = async () => {
 
 const updateBlog = async () => {
 
-  const imageName = currentEditBlogItem.value!.image.replace("https://ssusfaxxsolkavabffjm.supabase.co/storage/v1/object/public/product_images/images/", "")
+  try {
+    isLoading.value = true
+    const imageName = currentEditBlogItem.value!.image.replace("https://ssusfaxxsolkavabffjm.supabase.co/storage/v1/object/public/product_images/images/", "")
 
-  if (file.value) {
+    if (file.value) {
 
-    await supabase
-        .storage
-        .from('product_images')
-        .remove([`images/${imageName}`])
+      await supabase
+          .storage
+          .from('product_images')
+          .remove([`images/${imageName}`])
+    }
+
+    const {data, error} = await supabase
+        .from('blogs')
+        .update(currentEditBlogItem.value)
+        .eq('id', route.params.id)
+        .select()
+        .single()
+
+    router.replace("/admin/blogs")
+  }catch (error) {
+    console.error(error)
+  }finally {
+    isLoading.value = false
   }
-
-  const {data, error} = await supabase
-      .from('blogs')
-      .update(currentEditBlogItem.value)
-      .eq('id', route.params.id)
-      .select()
-      .single()
-
-  router.replace("/admin/blogs")
 }
 
 onMounted(() => {

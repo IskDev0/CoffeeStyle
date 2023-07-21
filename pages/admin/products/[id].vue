@@ -19,6 +19,9 @@
   <div v-if="loadingStore.isActionLoading" class="flex flex-col items-center justify-center h-screen">
   <TheLoader/>
   </div>
+  <div v-if="isLoading" class="flex flex-col items-center justify-center h-screen">
+    <TheLoader/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -92,12 +95,6 @@ const updateProduct = async () => {
 
   try {
     isLoading.value = true
-    const imageName = currentEditProduct.value!.image.replace("https://ssusfaxxsolkavabffjm.supabase.co/storage/v1/object/public/product_images/images/", "")
-
-    await supabase
-        .storage
-        .from('product_images')
-        .remove([`images/${imageName}`])
 
     if (file.value){
       await uploadImage()
