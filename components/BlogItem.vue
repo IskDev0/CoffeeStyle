@@ -1,7 +1,7 @@
 <template>
-  <article v-if="blog" @click="$router.push(`/blogs/${blog.id}`)" class="flex flex-col cursor-pointer">
+  <article v-if="blog" @click="$router.push(`/blogs/${blog.id}`)" class="flex flex-col items-center cursor-pointer w-full w-80">
     <img class="w-80 h-80" :src="blog.image" :alt="blog.title">
-    <div class="flex flex-col pt-8">
+    <div class="flex flex-col pt-8 w-80">
       <h1 class="text-xl">{{ blog.head }}</h1>
       <p class="opacity-70 pt-2.5 pb-4">{{ blog.body_short }}</p>
       <p class="tracking-widest uppercase text-xs">{{ blogDate }}</p>

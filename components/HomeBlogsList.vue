@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 mx-auto flex gap-5 mt-24">
+  <div class="container mx-auto flex flex-col items-center gap-8 md:grid md:grid-cols-2 lg:grid-cols-3 px-4 gap-5 mt-24">
     <BlogItem :blog="blog" v-for="blog in homeBlogs" :key="blog.id"/>
   </div>
 </template>
