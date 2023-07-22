@@ -20,9 +20,12 @@
 </template>
 
 <script setup lang="ts">
+import {PropType} from "@vue/runtime-core";
+
 const props = defineProps({
   adminOrder: {
-    required: true
+    required: true,
+    type: Object as PropType<OrderType>
   },
   index: {
     required: true,
@@ -37,7 +40,7 @@ const currentUser = ref()
 import {useLoadingStore} from "~/stores/loading";
 const loadingStore = useLoadingStore()
 
-const loadCurrentUser = async () => {
+const loadCurrentUser = async (): Promise<void> => {
 
   try {
     loadingStore.isActionLoading = true

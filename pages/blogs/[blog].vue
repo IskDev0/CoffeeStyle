@@ -1,8 +1,8 @@
 <template>
-  <section class="container mx-auto" v-if="currentBlog">
+  <section class="container mx-auto px-4" v-if="currentBlog">
     <div class="flex flex-col">
 <h1 class="text-3xl font-bold">{{currentBlog.head}}</h1>
-  <h2 class="flex items-center justify-between text-xl">{{currentBlog.body_short}}   <span class="tracking-wider uppercase text-xs">{{blogDate}}</span></h2>
+  <h2 class="flex flex-col items-start gap-4 lg:flex-row lg:items-center justify-between text-xl">{{currentBlog.body_short}}   <span class="tracking-wider uppercase text-xs">{{blogDate}}</span></h2>
     <div class="mt-10 content" v-html="currentBlog.body"></div>
     </div>
   </section>
@@ -18,7 +18,7 @@ const supabase = useSupabaseClient()
 
 const currentBlog = ref<BlogType>()
 
-const loadCurrentBlog = async () => {
+const loadCurrentBlog = async (): Promise<void> => {
   let { data: blogs, error } = await supabase
       .from('blogs')
       .select("*")
@@ -30,7 +30,7 @@ const loadCurrentBlog = async () => {
 }
 
 const blogDate = computed(() => {
-  let date = new Date(currentBlog.value.created_at);
+  let date = new Date(currentBlog.value!.created_at);
 
   let month = date.toLocaleString('default', { month: 'long' });
   let day = date.getDate();
@@ -68,5 +68,9 @@ onMounted(() => {
 }
 .content ul {
   @apply list-disc
+}
+
+.content a {
+  color: blue;
 }
 </style>

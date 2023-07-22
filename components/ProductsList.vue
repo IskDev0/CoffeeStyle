@@ -11,39 +11,11 @@
 <script setup>
 import ProductItem from "./ProductItem";
 import {useProductsStore} from "../stores/products";
-
 const productsStore = useProductsStore()
-
-const supabase = useSupabaseClient()
-
-const loadProducts = async () => {
-
-  try {
-
-    let {data: productsList, error} = await supabase
-        .from('products')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-    productsStore.areProductsLoading = true
-
-    productsStore.products = productsList
-    productsStore.sortedProducts = productsStore.products
-  } catch (error) {
-    console.log(error)
-  } finally {
-    productsStore.areProductsLoading = false
-  }
-
-}
-
-onMounted(() => {
-  loadProducts()
-})
 </script>
 
 <style scoped>
-.list-move, /* apply transition to moving elements */
+.list-move,
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;

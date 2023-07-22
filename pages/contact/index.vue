@@ -71,7 +71,7 @@ const rules = computed(() => {
   };
 });
 
-const submitForm = async () => {
+const submitForm = async (): Promise<void> => {
   const result = await $v.value.$validate()
   console.log(formData.value)
   if (!result) return

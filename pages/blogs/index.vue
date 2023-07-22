@@ -14,7 +14,7 @@ const supabase = useSupabaseClient()
 
 const isLoading = ref<boolean>(false)
 
-const loadBlogs = async () => {
+const loadBlogs = async (): Promise<void> => {
 
   try {
     isLoading.value = true

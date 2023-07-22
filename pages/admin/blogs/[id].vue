@@ -58,7 +58,7 @@ const router = useRouter()
 
 const key = import.meta.env.VITE_TINYMCE_API
 
-const isLoading = ref(false)
+const isLoading = ref<boolean>(false)
 
 const file = ref("")
 const previewImage = ref("")

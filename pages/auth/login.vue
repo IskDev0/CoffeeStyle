@@ -1,5 +1,5 @@
 <template>
-  <section class="w-1/2 mx-auto">
+  <section class="container mx-auto px-4">
     <form @submit.prevent="submitAuthForm" class="flex flex-col  gap-4">
       <label class="text-xs uppercase tracking-widest font-bold" for="email">Email</label>
       <input class="border-2 border-[#1D1F2E] rounded-md p-3" v-model="signFormData.email" type="email" id="email">
@@ -9,7 +9,7 @@
       <span class="text-red-500" v-for="error in $v.password.$errors" :key="error.$uid">{{error.$message}}</span>
       <MainButton class="self-center w-full rounded-md" color="blue" type="submit">Login</MainButton>
     </form>
-    <span class="flex justify-center gap-2 mt-6">Dont have an account? <NuxtLink class="font-bold underline" to="/auth/register">Sign Up</NuxtLink></span>
+    <span class="flex flex-col items-center md:flex-row justify-center gap-2 mt-6">Dont have an account? <NuxtLink class="font-bold underline" to="/auth/register">Sign Up</NuxtLink></span>
   </section>
 
       <LoadingPopup v-if="isLoading" />
@@ -56,7 +56,7 @@ const errorMessage = ref<string>()
 
 const router = useRouter()
 
-const submitAuthForm = async () => {
+const submitAuthForm = async (): Promise<void> => {
   const result = await $v.value.$validate()
 
   try {

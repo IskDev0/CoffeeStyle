@@ -8,9 +8,12 @@
 </template>
 
 <script setup lang="ts">
+import {PropType} from "@vue/runtime-core";
+
 defineProps({
   currentOrderUserAddress: {
-    required: true
+    required: true,
+    type: Object as PropType<OrderUserAddress>
   },
   isLoading: {
     required: true,

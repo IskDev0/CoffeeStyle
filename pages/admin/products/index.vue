@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import AddProduct from "~/components/UI/AddProduct.vue";
+
 import ActionSpinner from "~/components/UI/ActionSpinner.vue";
 import TheLoader from "~/components/UI/TheLoader.vue";
 import {useLoadingStore} from "~/stores/loading";
@@ -33,7 +33,7 @@ definePageMeta({
 
 const loadingStore = useLoadingStore()
 
-const openFormPopup = (type: boolean) => {
+const openFormPopup = (type: boolean):void => {
   isPopupLoading.value = type
 }
 
@@ -47,7 +47,7 @@ const isLoading = ref<boolean>(false)
 
 const adminProducts = ref<ProductType[]>([])
 
-const loadAdminProducts = async () => {
+const loadAdminProducts = async (): Promise<void> => {
 
   try {
     isLoading.value = true
@@ -68,7 +68,7 @@ const editProduct = (product: ProductType): void => {
   router.push(`products/${product.id}`)
 }
 
-const deleteProduct = async (product: ProductType) => {
+const deleteProduct = async (product: ProductType): Promise<void> => {
 
   try {
 

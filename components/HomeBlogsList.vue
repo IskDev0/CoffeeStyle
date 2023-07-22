@@ -9,9 +9,9 @@ import BlogItem from "~/components/BlogItem.vue";
 
 const homeBlogs = ref<BlogType[]>([])
 
-const supabase = useSupabaseClient([])
+const supabase = useSupabaseClient()
 
-const loadHomeBlogs = async () => {
+const loadHomeBlogs = async ():Promise<void> => {
 
   let { data: blogs, error } = await supabase
       .from('blogs')

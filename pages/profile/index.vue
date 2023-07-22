@@ -68,15 +68,14 @@ const isLoading = ref<boolean>(false)
 
 const currentUser = ref<UserType>()
 
-const userLogout = async () => {
+const userLogout = async (): Promise<void> => {
   await auth.signOut();
   router.replace("/auth/register")
 };
 
-const getUser = async () => {
+const getUser = async (): Promise<void> => {
 
   try {
-
     let { data: users, error } = await supabase
         .from('users')
         .select("*")
@@ -84,14 +83,14 @@ const getUser = async () => {
         .single()
 
     currentUser.value = users
-  }catch (e) {
-
+  }catch (error) {
+    console.error(error)
   }finally {
   }
 
 }
 
-const updateUserDetails = async () => {
+const updateUserDetails = async (): Promise<void> => {
 
   try {
     isLoading.value = true
@@ -112,9 +111,9 @@ const updateUserDetails = async () => {
 
 }
 
-const isError = ref(false)
+const isError = ref<boolean>(false)
 
-const updateUserEmail = async () => {
+const updateUserEmail = async (): Promise<void> => {
 
   try {
     isLoading.value = true
@@ -131,7 +130,7 @@ const updateUserEmail = async () => {
   }
 }
 
-const updateUserPassword = async () => {
+const updateUserPassword = async (): Promise<void> => {
 
   try {
     isLoading.value = true
@@ -151,10 +150,10 @@ const updateUserPassword = async () => {
   }
 }
 
-const updateUserAuth = async () => {
+const updateUserAuth = async (): Promise<void> => {
   try {
     isLoading.value = true
-    if (newPassword.value && user.value.email != currentUser.value.user.email){
+    if (newPassword.value && user.value!.email != currentUser.value!.user.email){
       await updateUserEmail()
       await updateUserPassword()
     }

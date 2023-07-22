@@ -21,7 +21,7 @@ const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
-const loadAdminOrders = async () => {
+const loadAdminOrders = async ():void => {
 
   let {data: orders, error} = await supabase
       .from('orders')

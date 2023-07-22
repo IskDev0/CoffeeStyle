@@ -19,7 +19,7 @@ const supabase = useSupabaseClient()
 
 const homeProducts = ref<ProductType[]>([])
 
-const loadHomeProducts = async () => {
+const loadHomeProducts = async (): Promise<void> => {
 
   let { data: products, error } = await supabase
       .from('products')

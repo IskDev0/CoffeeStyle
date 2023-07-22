@@ -51,7 +51,7 @@ const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
-const previewImage = ref<string>()
+const previewImage = ref()
 
 const file = ref()
 

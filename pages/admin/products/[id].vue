@@ -45,7 +45,7 @@ const isLoading = ref<boolean>(false)
 
 const currentEditProduct = ref<ProductType>()
 
-const getCurrentEditProduct = async () => {
+const getCurrentEditProduct = async (): Promise<void> => {
 
   try {
     loadingStore.isActionLoading = true
@@ -85,13 +85,13 @@ const uploadImage = async () => {
   currentEditProduct.value!.image = fileUrl.value.data.publicUrl
 }
 
-const selectFile = (e: { target: { files: any[]; }; }) => {
+const selectFile = (e: { target: { files: any[]; }; }):void => {
   file.value = e.target.files[0]
   const previewFile = e.target.files[0]
   previewImage.value = URL.createObjectURL(previewFile)
 }
 
-const updateProduct = async () => {
+const updateProduct = async (): Promise<void> => {
 
   try {
     isLoading.value = true

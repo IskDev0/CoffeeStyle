@@ -11,7 +11,7 @@
            :key="cartItem.id">
         <img class="h-16 w-16" :src="cartItem.image" alt="">
         <h1 class="font-bold">{{ cartItem.title }}</h1>
-        <div class="flex gap-2 items-center">
+        <div class="flex gap-2 items-center font-bold text-xl md:font-medium">
           <button @click="decrease(cartItem)">-</button>
           <p>{{ cartItem.quantity }}</p>
           <button @click="cartItem.quantity++">+</button>
@@ -60,11 +60,11 @@ const totalPrice = computed((): number => {
   return total
 })
 
-const deleteItemFromCart = (cartItem: CartProductType) => {
+const deleteItemFromCart = (cartItem: CartProductType):void => {
   cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
 }
 
-const checkOut = async () => {
+const checkOut = async (): Promise<void> => {
 
   const { data, error } = await supabase
       .from('orders')

@@ -14,9 +14,9 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 
-const orders = ref([])
+const orders = ref<OrderType[]>([])
 
-const loadOrders = async () => {
+const loadOrders = async (): Promise<void> => {
   let { data: ordersList, error } = await supabase
       .from('orders')
       .select('*')

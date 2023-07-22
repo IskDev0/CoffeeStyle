@@ -1,6 +1,6 @@
 <template>
   <section v-if="currentProduct" class="container mx-auto">
-    <div class="flex flex-col items-center md:flex-row items-start gap-20" v-if="currentProduct">
+    <div class="flex flex-col items-center justify-center md:flex-row items-start gap-20 px-4" v-if="currentProduct">
     <img class="h-96 w-80" :src="currentProduct.image" :alt="currentProduct.title">
       <div class="md:w-1/2">
     <p class="font-bold text-3xl">{{currentProduct.title }}</p>
@@ -42,11 +42,11 @@ const isAdded =ref<boolean>(false)
 
 const quantity = ref<number>(1)
 
-const increase = () => {
+const increase = ():void => {
   quantity.value++
 }
 
-const decrease = () => {
+const decrease = ():void => {
   if (quantity.value > 1){
     quantity.value--
   }
@@ -58,7 +58,7 @@ const isExist = (currentProduct:ProductType) => {
   return cartStore.cartProducts?.find(product => product.title == currentProduct?.title)
 }
 
-const getCurrentProduct = async () => {
+const getCurrentProduct = async (): Promise<void> => {
 
   let { data: product, error } = await supabase
       .from('products')
@@ -71,7 +71,7 @@ const getCurrentProduct = async () => {
 
 }
 
-const addToCart = () => {
+const addToCart = ():void => {
   let tempObj = {
     ...currentProduct.value,
     quantity: quantity.value,
@@ -89,7 +89,7 @@ const addToCart = () => {
   },3000)
 };
 
-const closeAlert = () => {
+const closeAlert = ():void => {
   isAdded.value = false
 }
 
