@@ -19,10 +19,7 @@
             :current-order-user="currentOrderUser"
             v-if="currentOrderUser"/>
         <TheLoader v-else/>
-        <OrderUserAddress
-            v-if="currentOrderUserAddress"
-            :is-loading="isLoading"
-            :current-order-user-address="currentOrderUserAddress"/>
+        <OrderUserAddress v-if="currentOrderDetails" :is-loading="isLoading" :current-order-details="currentOrderDetails"/>
         <div v-else class="flex justify-center">
           <TheLoader/>
         </div>
@@ -82,18 +79,6 @@ const loadCurrentOrderUser = async (): Promise<void> => {
   currentOrderUser.value = user
 }
 
-const loadCurrentOrderUserAddress = async (): Promise<void> => {
-
-  let {data: address, error} = await supabase
-      .from('addresses')
-      .select('*')
-      .eq('user_id', currentOrderDetails.value!.user_id)
-      .single()
-
-  currentOrderUserAddress.value = address
-
-}
-
 const orderStatus = computed(() => {
   return {
     'text-yellow-400': currentOrderDetails.value!.status == "Pending",
@@ -108,6 +93,5 @@ const orderStatus = computed(() => {
 onMounted(async () => {
   await loadCurrentOrderDetails()
   await loadCurrentOrderUser()
-  await loadCurrentOrderUserAddress()
 })
 </script>

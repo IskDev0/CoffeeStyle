@@ -24,7 +24,7 @@
 <script setup lang="ts">
 
 import {required, email, minLength} from "@vuelidate/validators";
-import useVuelidate from "@vuelidate/core";
+import {useVuelidate} from "@vuelidate/core";
 import MainButton from "~/components/UI/MainButton.vue";
 import MessageAlert from "~/components/UI/MessageAlert.vue";
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";

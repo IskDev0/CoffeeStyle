@@ -29,7 +29,7 @@
     </TransitionGroup>
     <div class="flex flex-col gap-4 items-end">
     <h1 class="text-3xl font-bold text-end">Total: ${{ totalPrice.toFixed(2) }}</h1>
-      <MainButton @click="checkOut" color="blue">Checkout</MainButton>
+      <MainButton @click="goToCheckout" color="blue">Checkout</MainButton>
     </div>
   </div>
   <div v-else>
@@ -64,20 +64,12 @@ const deleteItemFromCart = (cartItem: CartProductType):void => {
   cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
 }
 
-const checkOut = async (): Promise<void> => {
-
-  const { data, error } = await supabase
-      .from('orders')
-      .insert([
-        {
-          status: "Pending",
-          total: totalPrice.value,
-          user_id: user.value.id,
-          products: cartStore.cartProducts
-        },
-      ])
-      .select()
-
+const goToCheckout = () => {
+  if (user.value != null){
+    return navigateTo("/cart/checkout")
+  }else {
+    alert("Ты еблан! Ты забанен блять")
+  }
 }
 
 </script>
