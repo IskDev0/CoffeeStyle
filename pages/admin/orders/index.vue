@@ -1,6 +1,7 @@
 <template>
   <AdminOrdersSort/>
-  <AdminOrdersList :admin-orders="adminStore.sortedAdminOrders"/>
+  <AdminOrdersList v-if="adminStore.sortedAdminOrders.length > 0" :admin-orders="adminStore.sortedAdminOrders"/>
+  <p class="font-bold text-center text-2xl mt-10" v-else>No such orders</p>
   <TheLoader v-if="loadingStore.isActionLoading"/>
 </template>
 
@@ -21,7 +22,7 @@ const loadingStore = useLoadingStore()
 
 const supabase = useSupabaseClient()
 
-const loadAdminOrders = async ():void => {
+const loadAdminOrders = async (): Promise<void> => {
 
   let {data: orders, error} = await supabase
       .from('orders')
