@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 
-import TheLoader from "~/components/UI/TheLoader.vue";
 
 const client = useSupabaseAuthClient()
 
@@ -30,14 +29,12 @@ import MainButton from "~/components/UI/MainButton.vue";
 import MessageAlert from "~/components/UI/MessageAlert.vue";
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 
-
 const signFormData = ref(
     {
       email: "",
       password: ""
     }
 )
-
 
 
 const rules = computed(() => {
@@ -55,6 +52,9 @@ const isError = ref<boolean>()
 const errorMessage = ref<string>()
 
 const router = useRouter()
+
+const user = useSupabaseUser()
+const supabase = useSupabaseClient()
 
 const submitAuthForm = async (): Promise<void> => {
   const result = await $v.value.$validate()

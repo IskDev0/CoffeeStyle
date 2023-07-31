@@ -35,6 +35,7 @@
   <div v-else>
     <h1 class="text-3xl text-center font-bold mt-10">Cart is empty</h1>
   </div>
+  <MessageAlert :message="errorMessage" v-if="errorMessage"/>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +43,7 @@ import {useCartStore} from "~/stores/cart";
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 import MainButton from "~/components/UI/MainButton.vue";
+import MessageAlert from "~/components/UI/MessageAlert.vue";
 
 const cartStore = useCartStore()
 
@@ -64,11 +66,14 @@ const deleteItemFromCart = (cartItem: CartProductType):void => {
   cartStore.cartProducts = cartStore.cartProducts.filter(item => item.id !== cartItem.id)
 }
 
+const errorMessage = ref<string>()
+
 const goToCheckout = () => {
+  errorMessage.value = ""
   if (user.value != null){
     return navigateTo("/cart/checkout")
   }else {
-    alert("Ты еблан! Ты забанен блять")
+    errorMessage.value = "To buy something, you need to be authorized"
   }
 }
 
