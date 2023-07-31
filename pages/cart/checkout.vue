@@ -37,6 +37,8 @@
     </section>
     </div>
   </section>
+  <MessagePopup v-if="checkedOut"/>
+  <MessageAlert :message="alertMessage" v-if="alertMessage"/>
 </template>
 
 <script setup lang="ts">
@@ -64,6 +66,10 @@ const user = useSupabaseUser()
 const userAddresses = ref<AddressType[] | undefined>([])
 
 const userData = ref<UserType | null>()
+
+const checkedOut = ref<boolean>(false)
+
+const alertMessage = ref<string>()
 
 const getUser = async () => {
   let { data: users, error } = await supabase
@@ -108,6 +114,7 @@ const totalPrice = computed((): number => {
 const checkout = async () => {
 
   try {
+    alertMessage.value = ""
     if (selectedAddress.value){
       const { data, error } = await supabase
           .from('orders')
@@ -121,8 +128,11 @@ const checkout = async () => {
             },
           ])
           .select()
+
+      checkedOut.value = true
+      cartStore.cartProducts = []
     }else {
-      alert("select Address")
+      alertMessage.value = "Select address"
     }
   }catch (error) {
     console.error(error)
@@ -138,4 +148,6 @@ import CardDetailsForm from "~/components/CardDetailsForm.vue";
 import CheckoutItemList from "~/components/CheckoutItemList.vue";
 import MainButton from "~/components/UI/MainButton.vue";
 import CheckoutAddresses from "~/components/CheckoutAddresses.vue";
+import MessagePopup from "~/components/UI/MessagePopup.vue";
+import MessageAlert from "~/components/UI/MessageAlert.vue";
 </script>
