@@ -21,6 +21,19 @@ const supabase = useSupabaseClient()
 
 const currentBlog = ref<BlogType>()
 
+useSeoMeta({
+  title: () => `${currentBlog.value?.head} | CoffeeStyle`,
+  description: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  ogTitle: () => `${currentBlog.value?.head} | CoffeeStyle`,
+  ogDescription: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  ogImage: () => currentBlog.value?.image,
+  ogUrl: route.fullPath,
+  twitterTitle: `${currentBlog.value?.head} | CoffeeStyle`,
+  twitterDescription: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  twitterImage: () => currentBlog.value?.image,
+  twitterCard: 'summary_large_image'
+});
+
 const loadCurrentBlog = async (): Promise<void> => {
   let { data: blogs, error } = await supabase
       .from('blogs')

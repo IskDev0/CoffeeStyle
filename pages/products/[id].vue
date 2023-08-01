@@ -1,8 +1,5 @@
 <template>
   <section v-if="currentProduct" class="container mx-auto">
-    <Head>
-      <Title>{{currentProduct.title}}</Title>
-    </Head>
     <div class="flex flex-col items-center justify-center md:flex-row items-start gap-20 px-4" v-if="currentProduct">
     <img class="h-96 w-80" :src="currentProduct.image" :alt="currentProduct.title">
       <div class="md:w-1/2">
@@ -35,11 +32,27 @@ import MainButton from "~/components/UI/MainButton.vue";
 import CartAlert from "~/components/CartAlert.vue";
 import TheLoader from "~/components/UI/TheLoader.vue";
 
+const currentProduct = ref<ProductType>()
+const route = useRoute()
+
+useSeoMeta({
+  title: () => currentProduct.value?.title,
+  description: "Check out our premium coffee mugs. Made from high-quality ceramic, it's perfect for enjoying your favorite coffee or tea. Limited stock available!",
+  ogTitle: () => currentProduct.value?.title,
+  ogDescription: "Check out our premium coffee mugs. Made from high-quality ceramic, it's perfect for enjoying your favorite coffee or tea. Limited stock available!",
+  ogImage: () => currentProduct.value?.image,
+  ogUrl: () => route.fullPath,
+  twitterTitle: () => currentProduct.value?.title,
+  twitterDescription: "Check out our premium coffee mugs. Made from high-quality ceramic, it's perfect for enjoying your favorite coffee or tea. Limited stock available!",
+  twitterImage: () => currentProduct.value?.image,
+  twitterCard: 'summary_large_image'
+});
+
+
 const supabase = useSupabaseClient()
 
 const productsStore = useProductsStore()
 const cartStore = useCartStore()
-const route = useRoute()
 
 const isAdded =ref<boolean>(false)
 
@@ -54,8 +67,6 @@ const decrease = ():void => {
     quantity.value--
   }
 }
-
-const currentProduct = ref<ProductType>()
 
 const isExist = (currentProduct:ProductType) => {
   return cartStore.cartProducts?.find(product => product.title == currentProduct?.title)

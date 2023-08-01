@@ -4,6 +4,20 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
   },
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon.svg'
+        }
+      ],
+      htmlAttrs: {
+        lang: "en"
+      }
+    }
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
