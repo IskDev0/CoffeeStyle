@@ -41,7 +41,22 @@ import MessageAlert from "~/components/UI/MessageAlert.vue";
 import TheLoader from "~/components/UI/TheLoader.vue";
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";
 
+useSeoMeta({
+  title: "Profile | CoffeeStyle",
+  description: 'View and manage your profile at CoffeeStyle. Update your account details, track your orders, and manage your preferences. Sign in to access your personalized profile.',
+  ogTitle: 'Profile | CoffeeStyle',
+  ogDescription: 'View and manage your profile at CoffeeStyle. Update your account details, track your orders, and manage your preferences. Sign in to access your personalized profile.',
+  ogImage: '/home-image.jpg',
+  ogUrl: '',
+  twitterTitle: 'Profile | CoffeeStyle',
+  twitterDescription: 'View and manage your profile at CoffeeStyle. Update your account details, track your orders, and manage your preferences. Sign in to access your personalized profile.',
+  twitterImage: '/home-image.jpg',
+  twitterCard: 'summary_large_image'
+});
+
+
 useHead({
+  title: "Profile",
   link: [
     {
       rel: 'stylesheet',

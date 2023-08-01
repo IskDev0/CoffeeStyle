@@ -1,7 +1,7 @@
 <template>
 <footer class="container mx-auto flex flex-col gap-8 md:grid grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-5 mt-24 mb-12 px-4">
 <div class="flex flex-col  gap-6">
-  <NuxtLink to="/"><img src="/logo.svg" alt="logo"></NuxtLink>
+  <NuxtLink to="/"><img src="/icons/logo.svg" alt="logo"></NuxtLink>
   <p class="opacity-70">Delivering the best coffee life since 1996. From coffee geeks to the real ones.</p>
 </div>
   <div class="flex flex-col gap-6">

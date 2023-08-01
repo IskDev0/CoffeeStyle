@@ -1,5 +1,8 @@
 <template>
   <section v-if="currentProduct" class="container mx-auto">
+    <Head>
+      <Title>{{currentProduct.title}}</Title>
+    </Head>
     <div class="flex flex-col items-center justify-center md:flex-row items-start gap-20 px-4" v-if="currentProduct">
     <img class="h-96 w-80" :src="currentProduct.image" :alt="currentProduct.title">
       <div class="md:w-1/2">

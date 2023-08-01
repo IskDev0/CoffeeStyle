@@ -65,7 +65,7 @@ import {computed, onMounted, ref} from "vue";
 import MainButton from "~/components/UI/MainButton";
 import TheLoader from "~/components/UI/TheLoader";
 import {required} from "@vuelidate/validators";
-import useVuelidate from "@vuelidate/core/dist/index";
+import {useVuelidate} from "@vuelidate/core";
 
 const headers = new Headers();
 headers.append("X-CSCAPI-KEY", import.meta.env.VITE_COUNTRY_STATE_CITY_KEY);

@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // @ts-ignore
+  nitro: {
+    compressPublicAssets: true,
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',

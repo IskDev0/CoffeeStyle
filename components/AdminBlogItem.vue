@@ -9,8 +9,8 @@
     </div>
 
     <div class="flex items-center gap-4 mr-6">
-      <img @click="updateBlogItem(adminBlog)" class="cursor-pointer" src="/edit.svg" alt="edit">
-      <img @click="deleteBlogItem(adminBlog)" class="cursor-pointer" src="/delete.svg" alt="delete">
+      <img @click="updateBlogItem(adminBlog)" class="cursor-pointer" src="/icons/edit.svg" alt="edit">
+      <img @click="deleteBlogItem(adminBlog)" class="cursor-pointer" src="/icons/delete.svg" alt="delete">
     </div>
   </article>
 </template>

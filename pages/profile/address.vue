@@ -9,7 +9,7 @@
       <p>Street: {{address.street}}</p>
       <p>{{address.postal_code}}</p>
     </div>
-    <button @click="deleteAddress(address)"><img src="/delete.svg" alt=""></button>
+    <button @click="deleteAddress(address)"><img src="/icons/delete.svg" alt=""></button>
   </div>
   </div>
   <AddAddress @open="openLoadingPopup(value)"/>
@@ -19,6 +19,10 @@
 <script setup lang="ts">
 import AddAddress from "~/components/AddAddress.vue";
 import LoadingPopup from "~/components/UI/LoadingPopup.vue";
+
+useHead({
+  title: "Profile | Address"
+})
 
 definePageMeta({
   layout: "profile"

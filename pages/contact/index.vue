@@ -41,14 +41,35 @@
 <script setup lang="ts">
 import {VueTelInput} from "vue-tel-input";
 import {required, email, minLength} from "@vuelidate/validators";
-import useVuelidate from "@vuelidate/core";
+import {useVuelidate} from "@vuelidate/core";
 import MainButton from "~/components/UI/MainButton.vue";
 
+useSeoMeta({
+  title: "Contact Us | CoffeeStyle",
+  description: 'Get in touch with us at CoffeeStyle. If you have any questions, inquiries, or feedback, feel free to contact our friendly customer support team. We are here to assist you!',
+  ogTitle: 'Contact Us | CoffeeStyle',
+  ogDescription: 'Get in touch with us at CoffeeStyle. If you have any questions, inquiries, or feedback, feel free to contact our friendly customer support team. We are here to assist you!',
+  ogImage: '/contact_preview.jpg',
+  ogUrl: 'https://www.CoffeeStyle.com/contact-us',
+  twitterTitle: 'Contact Us | CoffeeStyle',
+  twitterDescription: 'Get in touch with us at CoffeeStyle. If you have any questions, inquiries, or feedback, feel free to contact our friendly customer support team. We are here to assist you!',
+  twitterImage: '/contact_preview.jpg',
+  twitterCard: 'summary_large_image'
+});
+
 useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
   link: [
     {
       rel: 'stylesheet',
       href: 'https://unpkg.com/vue-tel-input/dist/vue-tel-input.css'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.svg'
     }
   ]
 })

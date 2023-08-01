@@ -8,6 +8,10 @@ import OrderItem from "~/components/OrderDetailsItem.vue";
 import OrderDetailsItem from "~/components/OrderDetailsItem.vue";
 import OrdersList from "~/components/OrdersList.vue";
 
+useHead({
+  title: "Profile | Orders"
+})
+
 definePageMeta({
   layout: "profile"
 })

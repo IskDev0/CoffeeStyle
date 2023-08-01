@@ -51,6 +51,7 @@ definePageMeta({
 })
 
 useHead({
+  title: "Cart | Checkout",
   link: [
     {
       rel: 'stylesheet',

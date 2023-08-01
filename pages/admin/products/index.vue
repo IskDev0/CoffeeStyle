@@ -9,8 +9,8 @@
           <h1 class="font-semibold">{{ adminProduct.title }}</h1>
         </div>
         <div class="flex items-center gap-6 mr-6">
-          <img class="cursor-pointer" @click="editProduct(adminProduct)" src="/edit.svg" alt="edit">
-          <img class="cursor-pointer" @click="deleteProduct(adminProduct)" src="/delete.svg" alt="delete">
+          <img class="cursor-pointer" @click="editProduct(adminProduct)" src="/icons/edit.svg" alt="edit">
+          <img class="cursor-pointer" @click="deleteProduct(adminProduct)" src="/icons/delete.svg" alt="delete">
         </div>
       </div>
     </div>

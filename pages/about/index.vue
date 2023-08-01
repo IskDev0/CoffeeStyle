@@ -19,3 +19,33 @@
     <p class="mb-4">Aenean ultrices, turpis nec fringilla tempor, dui tortor ornare nulla, eu suscipit est libero vel tortor. Quisque fringilla ultricies dui nec mattis. Sed aliquam metus a leo efficitur, nec iaculis nibh dapibus. In porttitor est sed orci hendrerit, eget dictum ante blandit. Pellentesque efficitur, elit vel tincidunt varius, lacus enim venenatis ligula, ut cursus libero lectus eget arcu. Mauris euismod aliquam nibh, ut tempus magna consectetur quis. Donec sollicitudin massa eu odio gravida, ut pulvinar lacus volutpat. Curabitur venenatis scelerisque augue a sodales. Nullam pulvinar metus eget malesuada venenatis.</p>
   </div>
 </template>
+
+<script setup>
+
+useSeoMeta({
+  title: "About Us | CoffeeStyle",
+  description: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  ogTitle: 'About Us | CoffeeStyle',
+  ogDescription: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  ogImage: '/about.jpg',
+  ogUrl: '',
+  twitterTitle: 'About Us | CoffeeStyle - Premium Coffee Mugs',
+  twitterDescription: 'Welcome to CoffeeStyle! We are a passionate team of coffee enthusiasts dedicated to providing you with the best coffee mugs on the market. Learn more about our mission, values, and commitment to quality.',
+  twitterImage: '/about.jpg',
+  twitterCard: 'summary_large_image'
+});
+
+useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.svg'
+    }
+  ]
+})
+
+</script>

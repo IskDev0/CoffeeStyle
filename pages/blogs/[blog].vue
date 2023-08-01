@@ -1,5 +1,8 @@
 <template>
   <section class="container mx-auto px-4" v-if="currentBlog">
+    <Head>
+      <Title>{{currentBlog.head}}</Title>
+    </Head>
     <div class="flex flex-col">
 <h1 class="text-3xl font-bold">{{currentBlog.head}}</h1>
   <h2 class="flex flex-col items-start gap-4 lg:flex-row lg:items-center justify-between text-xl">{{currentBlog.body_short}}   <span class="tracking-wider uppercase text-xs">{{blogDate}}</span></h2>

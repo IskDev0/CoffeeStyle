@@ -40,6 +40,11 @@
 
 <script setup lang="ts">
 import {useCartStore} from "~/stores/cart";
+
+useHead({
+  title: "Cart"
+})
+
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 import MainButton from "~/components/UI/MainButton.vue";
